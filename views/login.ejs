@@ -1,0 +1,38 @@
+<%- include ("partials/signupLoginHeader") -%>
+
+    
+    <main class="form-signin w-100 m-auto">
+        <form name="loginForm" action="/login" method="post">
+          <h1 class="standout h3 mb-3 fw-normal">Login</h1>
+       
+      
+          
+       
+          <div class="form-floating">
+              <input type="text" name="username" id="username" class="form-control middle"  placeholder="Username" required>
+              <label for="username">Username</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" name="password" id="password" placeholder="password" class="form-control bottom" required>
+              <label for="password">Password</label>
+            </div>
+            
+      
+          
+          <button class="w-100 btn btn-lg btn-dark" type="submit">Sign in</button>
+        </form><br>
+        <p>Don't have an account already? <a href="/signup">Sign up</a></p>
+        <p><a href="/forgotpwd">Forgot password?</a></p>
+
+
+      </main>
+      <div class="instructions hidden">
+        <p>For students: Username must be your roll number (eg. CB.EN.U4CSE20XXX)<br>
+        For faculty: Username must be of the format initials_name (eg. p_mukesh)<br>
+        Password length must be minimum 8 characters and must feature at least one letter of both cases, a numeric and special character.</p>
+      </div>
+      
+      <%- include ("partials/signupLoginFooter") -%>
+
+      
+      

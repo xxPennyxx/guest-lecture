@@ -1,0 +1,23 @@
+#generalinfo{
+    padding:20px
+}
+
+input[type=checkbox]{
+    height: 1.25rem;
+    width: 1.25rem;
+    color: black;
+  }
+
+  input[type=radio]{
+    height: 1.25rem;
+    width: 1.25rem;
+    color: black;
+
+  }
+  .datetime{
+    width:100%
+  }
+
+  .mode1{
+    width:75%
+  }

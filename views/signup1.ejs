@@ -1,0 +1,61 @@
+<%- include ("partials/signupLoginHeader") -%>
+
+    
+    <main class="form-signin w-100 m-auto">
+        <form action="/signup1" method="post" name="signupform1">
+          <h1 class=" standout h3 mb-3 fw-normal">Confirm Student Details</h1>
+          
+       
+      
+          
+          
+
+            <div class="form-floating">
+              <input type="number" name="year" id="year" class="form-control bottom" placeholder="Year of Study" min="1" max="5" required>
+              <label for="year">Year of Study</label>
+            </div>
+            
+            <div class="form-floating">
+              <select name="dept">
+                <option value="" selected disabled hidden>Select Department</option>
+
+                <option value="BTech AEE">BTech AEE</option>
+                <option value="BTech AIE">BTech AIE</option>
+                <option value="BTech ARE">BTech ARE</option>
+                <option value="BTech CIE">BTech CIE</option>
+                <option value="BTech CCE">BTech CCE</option>
+                <option value="BTech CSE">BTech CSE</option>                
+                <option value="BTech CYS">BTech CYS</option>
+                <option value="BTech EEE">BTech EEE</option>
+                <option value="BTech ECE">BTech ECC</option>
+                <option value="BTech ELC">BTech ELC</option>
+                <option value="BTech MEE">BTech MEE</option>
+
+                <option value="MTech CSE">MTech CSE</option>
+                <option value="MTech CYS">MTech Cyber Security</option>
+
+                <option value="Int. MSc Physics">Int. MSc Physics</option>
+                <option value="Int. MSc Chemistry">Int. MSc Chemistry</option>
+                <option value="Int. MSc Data Science">Int. MSc Data Science</option>
+
+                <option value="BA English">BA English</option>
+                <option value="MA English">MA English</option>
+
+
+              </select>
+            </div>
+            <br>
+            
+            
+      
+          
+          <button class="w-100 btn btn-lg btn-dark" name="confirm" type="submit" value="<%= currUsers1[currUsers1.length-1].username %>">Confirm</button>
+        </form><br>
+        <p>Already an existing user? <a href="/login">Login</a></p>
+      </main>
+    
+      
+      <%- include ("partials/signupLoginFooter") -%>
+
+      
+      

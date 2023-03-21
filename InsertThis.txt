@@ -1,0 +1,4 @@
+db.users.insertOne({username: "admin",email:"admin@amrita.edu",createps:"Password12345!", confirmps:"Password12345!", role:"admin" });
+
+
+

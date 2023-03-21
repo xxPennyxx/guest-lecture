@@ -1,0 +1,53 @@
+<%- include ("partials/dashboardHeaderAdmin") -%>
+<div class="w3-container w3-light-grey" style="padding:128px 32px; width:75%; margin:auto;" id="generalinfo">
+    <h3 class="w3-xxxlarge">2. Event Information</h3>
+    
+      <form action="/addevent1" method="POST">
+
+        <!-- If it's online, hide the venue; if offline, hide the link. If hybrid, keep both-->
+
+        <% if(currEvents1[currEvents1.length-1].mode==='online'){ %>
+
+          <p><label class="w3-xlarge" for="link">Virtual event link (YouTube, Meet, Webex or Teams)</label></p><input class="w3-input w3-border" id="link" type="text" placeholder="eg. https://youtu.be/linkhere" required name="link">
+          <% } else if(currEvents1[currEvents1.length-1].mode==='offline'){%>
+          <p><label class="w3-xlarge" for="venue">Venue</label></p><textarea class="w3-input w3-border" id="venue" placeholder="eg. Seminar Hall I, AB3, Amrita School of Computing, Amrita Vishwa Vidyapeetham, Coimbatore, TN" rows="2" required name="venue"></textarea>
+
+          <% } else { %>
+
+
+
+
+
+
+        <p><label class="w3-xlarge" for="link">Virtual event link (YouTube, Meet, Webex or Teams)</label></p><input class="w3-input w3-border" id="link" type="text" placeholder="eg. https://youtu.be/linkhere" required name="link">
+        <p><label class="w3-xlarge" for="venue">Venue</label></p><textarea class="w3-input w3-border" id="venue" placeholder="eg. Seminar Hall I, AB3, Amrita School of Computing, Amrita Vishwa Vidyapeetham, Coimbatore, TN" rows="2" required name="venue"></textarea>
+            <%  } %>
+
+        <br>
+        <p><label class="w3-xxlarge" for="link">Agenda</label></p><br>
+
+
+        <% for (let i=0;i<currEvents1[currEvents1.length-1].days;i++) { %>
+
+
+            <p><label class="w3-large" for="day<%=(i+1)%>">Day <%= (i+1) %></label></p><textarea class="w3-input w3-border" rows=5 id="day<%=(i+1)%>" placeholder="Enter the detailed agenda for day <%=(i+1)%>, including start time, end time and flow of event." required name="agenda"></textarea>
+            <% } %>
+              <br>
+          <table style="width:120%">
+            <tr>
+
+            <td><p><label class="w3-xlarge" for="maxAttendees">Number of Seats</label></p><input style="width:40%" class="w3-input w3-border" id="maxAttendees" type="number" min="0" max="500" required name="maxAttendees"></td>
+            <td><p><label class="w3-xlarge" for="numSpeakers">Number of Speakers</label></p><input style="width:40%" class="w3-input w3-border" id="numSpeakers" type="number" min="0" max="4" required name="numSpeakers"></td>
+              </tr>
+          </table>
+        <p>
+          <button class="w3-button w3-black" name="submit" type="submit" value="<%= currEvents1[currEvents1.length-1].name %>">
+            <i class="fa fa-check"></i> SAVE AND CONTINUE
+          </button>
+        </p>
+      </form>
+      
+    </div>
+  </div>
+
+ 

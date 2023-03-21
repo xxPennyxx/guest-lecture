@@ -1,0 +1,77 @@
+<%- include ("partials/dashboardHeaderAdmin") -%>
+<div class="w3-container w3-light-grey" style="padding:128px 32px; width:75%; margin:auto;" id="generalinfo">
+    <h3 class="w3-xxxlarge">1. General Information</h3>
+    
+      <form action="/addevent" method="POST">
+        <p><label class="w3-xlarge" for="name">Name of Event</label></p><input class="w3-input w3-border" id="name" type="text" placeholder="eg. Anokha 2023" required name="name">
+        <p><label class="w3-xlarge" for="desc">Short Description</label></p><textarea class="w3-input w3-border" id="desc" placeholder="This will be displayed on the events page. Keep it under 150 characters." maxlength="150"  name="desc"></textarea>
+        <p><label class="w3-xlarge" for="desc1">Detailed Description</label></p><textarea class="w3-input w3-border" id="desc1" rows=10 placeholder="A more detailed description on the event."  name="desc1"></textarea>
+
+        <p><label class="w3-xlarge" for="desc1">Add Tags</label></p>
+
+        <!-- Add more tags-->
+
+        <p><input type="checkbox" name="tags" id="ML" value="ML"> <label class="w3-large" for="ML">Machine Learning</label></p>
+        <p><input type="checkbox" name="tags" id="programming" value="programming"> <label class="w3-large" for="programming">Coding and Programming</label></p>
+        <p><input type="checkbox" name="tags" id="sec" value="sec"> <label class="w3-large" for="sec">Cyber Security</label></p>
+        <p><input type="checkbox" name="tags" id="research" value="research"> <label class="w3-large" for="research">Research and Open Source</label></p>
+        <p><input type="checkbox" name="tags" id="culture" value="culture"> <label class="w3-large" for="culture">Culture and Heritage</label></p>
+        <p><input type="checkbox" name="tags" id="life" value="life"> <label class="w3-large" for="life">Life Skills</label></p>
+        <p><input type="checkbox" name="tags" id="web" value="web"> <label class="w3-large" for="web">Web and App Development</label></p>
+        <p><input type="checkbox" name="tags" id="IoT" value="IoT"> <label class="w3-large" for="ML">Internet of Things</label></p>
+        <p><input type="checkbox" name="tags" id="career" value="career"> <label class="w3-large" for="career">Career Development and Entrepreneurship</label></p>
+        <p>  </p>
+
+        <p><label class="w3-xlarge" for="imgURL">Add thumbnail image URL</label></p><input class="w3-input w3-border" id="imgURL" type="text" placeholder="eg. https://www.example.com/images/flower.png"  name="imgURL">
+        <table class="datetime" >
+        <tr>
+        <td><p><label class="w3-xlarge" for="startdate">Start date</label></p><input style="width:50%" class="w3-input w3-border" id="startdate" type="date"  name="startdate"></td>
+        <td><p><label class="w3-xlarge" for="starttime">Start time</label></p><input style="width:50%" class="w3-input w3-border" id="starttime" type="time" step="300"  name="starttime"></td>
+        </tr>
+
+        <tr>
+           <td><p><label class="w3-xlarge" for="enddate">End date</label></p><input style="width:50%" class="w3-input w3-border" id="enddate" type="date"  name="enddate"></td>
+           <td><p><label class="w3-xlarge" for="endtime">End time</label></p><input style="width:50%" class="w3-input w3-border" id="endtime" type="time" step="300"  name="endtime"></td>
+        </tr>
+
+    </table><br>
+
+    <!--Agenda, including venue/meeting link will be added after submission of basic event details-->
+    <span class="w3-xlarge">Mode of Event</span>
+    <table class="mode1">
+        <tr>
+            
+    <td><p class="w3-large">Online<input class="w3-input w3-border" id="online" value="online" type="radio"  name="mode"></p></td>
+    <td><p class="w3-large">Offline<input class="w3-input w3-border" id="offline" value="offline" type="radio"  name="mode"></p></td>
+    <td><p class="w3-large">Hybrid<input class="w3-input w3-border" id="hybrid" value="hybrid" type="radio"  name="mode"></p></td>
+            </tr>
+    </table>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <p>
+          <button class="w3-button w3-black" type="submit">
+            <i class="fa fa-check"></i> SAVE AND CONTINUE
+          </button>
+        </p>
+      </form>
+      <!-- Image of location/map -->
+      
+    </div>
+  </div>
+
+ 
