@@ -2,13 +2,11 @@
 
 ## Here's a detailed guide to run this project.
 
-1. Open Hyper terminal, navigate to a suitable directory and type
-
-git clone https://github.com/xxpennyxx/guest-lecture.git
+1. Open Hyper terminal (or CMD), navigate to a suitable directory and type
+`git clone https://github.com/xxpennyxx/guest-lecture.git`
 
 2. To run it on Localhost, simply type
-
-nodemon
+`nodemon`
 
 3. To generate admin login details,
 a) run `mongod` on another terminal (to start up the MongoDB server), and `mongosh` on yet another.
