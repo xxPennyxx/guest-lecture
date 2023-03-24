@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Insert event name here!!!</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+
+body, html {
+  height: 100%;
+  line-height: 1.8;
+}
+
+/* Full height image header */
+.bgimg-1 {
+  background-position: center;
+  background-size: cover;
+  background-image: url("https://t4.ftcdn.net/jpg/04/95/28/65/360_F_495286577_rpsT2Shmr6g81hOhGXALhxWOfx1vOQBa.jpg");
+  min-height: 100%;
+}
+
+.w3-bar .w3-button {
+  padding: 16px;
+}
+
+.image-cropper {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+img {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+    .round{
+        border-radius: 50%;
+        
+    }
+    .centered{
+        text-align: center;
+        margin: auto;
+    }
+    .agenda{
+        width:80%;
+        margin: auto;
+    }
+
+    .tags {
+-moz-border-radius: 15px;
+-webkit-border-radius: 15px;
+border-style: solid;
+border-color: white;
+border-radius: 10px;
+padding: 5px;
+margin-right:7.5px;
+margin-top:7.5px;
+margin-bottom:7.5px;
+} 
+</style>
+</head>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-card" id="myNavbar">
+    <a href="#home" class="w3-bar-item w3-button w3-wide">LOGO</a>
+    <!-- Right-sided navbar links -->
+    <div class="w3-right w3-hide-small">
+      <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+      <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> TEAM</a>
+      <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> WORK</a>
+      <a href="#pricing" class="w3-bar-item w3-button"><i class="fa fa-usd"></i> PRICING</a>
+      <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+    </div>
+    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Sidebar on small screens when clicking the menu icon -->
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
+  <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button">TEAM</a>
+  <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">WORK</a>
+  <a href="#pricing" onclick="w3_close()" class="w3-bar-item w3-button">PRICING</a>
+  <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+</nav>
+
+<!-- Header with full-height image -->
+<header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+  <div class="w3-display-left w3-text-white" style="padding:48px">
+    <span class="w3-jumbo w3-hide-small">Event 1</span><br>
+    <span class="w3-xxlarge w3-hide-large w3-hide-medium">Start something that matters</span><br>
+    <span class="w3-large">March 31, 2023 2:00pm IST</span><br>
+
+    <span class="w3-large">AB3, Amrita School of Computing, Coimbatore.</span><br><br>
+    <span class="tags">Tag 1</span> <span class="tags">Tag 2</span>
+    <!-- Disable the RSVP button if it's already OVER-->
+    <p><a href="#about" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">RSVP now</a></p>
+  </div> 
+  <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
+</header>
+
+<!-- About Section -->
+<div class="w3-container" style="padding:128px 16px" id="about">
+  <h1 class="w3-xxxlarge w3-center">About this event</h2>
+  <p class="w3-center w3-large" style="margin: 0 5rem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Imperdiet massa tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada. Auctor urna nunc id cursus metus aliquam eleifend. Ipsum dolor sit amet consectetur adipiscing elit duis tristique. Sit amet nisl suscipit adipiscing bibendum est ultricies. Curabitur gravida arcu ac tortor dignissim convallis aenean et. Ac turpis egestas integer eget. At varius vel pharetra vel turpis nunc eget. Ornare aenean euismod elementum nisi quis eleifend quam adipiscing. Rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi. Viverra nam libero justo laoreet sit amet cursus sit amet. Et tortor consequat id porta nibh venenatis cras sed felis. In hac habitasse platea dictumst vestibulum rhoncus est. Vitae purus faucibus ornare suspendisse sed nisi lacus sed viverra.
+    Augue eget arcu dictum varius duis at. Accumsan in nisl nisi scelerisque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames. Rhoncus est pellentesque elit ullamcorper dignissim. Ut ornare lectus sit amet est placerat in egestas. Placerat vestibulum lectus mauris ultrices. Nunc pulvinar sapien et ligula. Sapien et ligula ullamcorper malesuada proin libero. Orci phasellus egestas tellus rutrum tellus pellentesque eu. Turpis nunc eget lorem dolor sed. Augue mauris augue neque gravida in fermentum.</p>
+</div>
+
+
+
+<!-- Team Section -->
+<div class="w3-container" style="padding:16px 16px" id="team">
+    <h1 class="w3-xxxlarge w3-center">Speakers</h1>
+  
+  <div class="w3-row-padding w3-center" style="margin-top:64px">
+    <div class="w3-quarter centered w3-center">
+        <div class="image-cropper round centered">
+            <img src="https://lh3.googleusercontent.com/SuVvVdG5jdS6D1_aeT9vkue6A42fyM7_xRk34qEQMzWe5CEXLbvngwPP-b5x5UWua_mx-1KyKkr1B-s3c0f0tO00wlApwOqarARIR8Op2iVEe79jUh6LF2b-A25-Z1v0GebFcPEudGuf8VEcYbjT8Wh9ZxOWShKosioRXuYtuOlZTwm-DGurACCdnqiowZTPVyrb03bCTBih6aDIOBcPu2iAHJJtgsoAIN_LeFJahRspk3G18C_aNM5Wv5cqTrGUIwTyAHPEzJe6T7Q_PgP0CAl21rNTtsut75pZsaMzeY0t_QNyL5bP-PbIdeSZFmVRw8UzqKT24_tG57Se4zVx8z5AfYqlIZUBDkEj6j5NeCbxmHB-CC2ALsFNv4xUyRSt6D-J5oVkjCivVCKdah6zFr8hvXTvXxhwQxRYlx_HJZ64dvGQiw4XGEQit54W0xJtQZLAzHDg41NaueKtCmi-KjAOWddLJyjuQIDhD6qtJ8hSubVdDGMxzDWGlkqA6L5bcMwBXKRhuFwXT9cqFMAz_2yCNQ11WsF78dLeZCIku5S_9K_9H839B-G6yBi0g0iFjOdFwAmP7EqAeSGvoO6j-WYYz_2v3FiLtyZ0zIwRLJ9vzs3m8M3IBpCVEijyuo8W011BZBTKhGNetw_72vbmtj0zG1418rp-gULdJUCPlMm3RhwEQBOvUPsodtFgbEbUec_nBupJ6ratYzQiu9MSJEJSaSP5kvk-ydMMU4d6-JZQvjpViqD5MSFnasGF9BEvkazq_lQNJo_V4_9X8eVvAMeGzOMlSLz29fmV9SMtAwUHxY0re6sT5CGhg52tQTlV739YEw7BjEYCfvLDo5nI89uTiY1aHK6-EsAxH_hR-b_YbOIowM08mACnY74p3eSNotfAvOjGj-pvdBv-r8OhPQ63Dv1kPSao4CViicrKFIOWZTAjTe-4BFilEOkT-Xl4EQR_Afpt_1HOSmFD5UI=s327-no?authuser=0" alt="Donald Duck">
+        </div>
+      <p class="w3-xlarge">Jake Weatherald</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      <button class="w3-button w3-black w3-padding-large">View Profile</button>
+
+    </div>
+    
+    <div class="w3-quarter centered w3-center">
+        <div class="image-cropper round centered">
+            <img src="https://lh3.googleusercontent.com/frQR1EWRLLxFOqXrq3CYKyc5LWWFPxmy3HkH1JRWRNJYK7tEL_CbjF-G8oHO_GN3BeUMvHaZu_2VkEAyjQlOrP-YtvtLMMtV2HLTJWcDycoDwIzO3aLGzuGLPy45kmTy7WERhWSclWnk3kEwNq0BWT3NEgKIbLyUOOeZ8R-23D555PBNl8Kz5758fN8VEBwqHGo0dULvHdmtF9q-9feI-G7L0Ll3eHPRXYiburPcINgGToINDB4vWQ4guPQ862eSQoXP4Z2kzi7RqmW4YfRyiMBkSwo4r6TQ_H-GxqnjIHaoDxMx3hb6FgcuRtxi7pg4ym-ma1n3Peflg2ZTIZIXXgM1k6lR1_10L-oMbgXCLiE-2vpoOuY_JNbiXGcju6oIom8pbFRMpMaIKQC8mzecveWK-GV2eqRL7QSY8s1DctVlPhx4NvgT5SkgkSGlAzoxP1XxO0_m1mKY-xZivGWWPrW9YYoOhT4q3rgRXwV3E_n7WCiSrl5MYUzua-xRbBVqvxunWyZUMZ-xo__rg5TWkW4uj2mvzkd1nD0cf6jrd6Ek_4QAQ1ZaptPLL9Kk3_fCe4UNWw1FTiSJRTRq7WoomMTAp38zwNuR2NfyP8RJPDqoYgySvFEtRRD92lV5bAZSPNqfV7ia_UdmHN6R7vKYhE7rmSgUIm2xM_3GMQFnW2QRGnUXKD2HUkedSUQgZSTE_dNyjK1dzqpULQYmdT6k7AsUNbpJdNgTAz-yYxKP-RZae8GXMsv0TWogx5E5pP7gR_ybyQgd4cL0kzlXd8RRmLzp8yr4qa5XluxEz2e1ZY0Ohr2IWQAMLw9j-REpCKvYgUixZtS3ZPhB-Y9pmyJKPfcvHf5h4FmHwq0iYQWMk7Cr-mdDQ18dIMl-KXTwjj2mtJgeg95Ww8KI2BMhTKatfD19gjGJ9Ztaw1VT8hpou6l0xk9TW-NOin8Ho208nMNgOHML4kXOnBuQp0wVnXc=w595-h893-no?authuser=0">
+        </div>
+      <p class="w3-xlarge">Jhye Richardson</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      <button class="w3-button w3-black w3-padding-large">View Profile</button>
+
+    </div>
+    <div class="w3-quarter centered w3-center">
+        <div class="image-cropper round centered">
+            <img src="https://lh3.googleusercontent.com/JFNVj6tQoHIIvV9o64R_VZtOotZNM1GQBwwlfM3_5JfUCOfowhe0SVt7Ep_9XC38Ctz0kzlWxHTieGn8qRR9HGWbhH02uMKe344RzKBw-piYJNm0-BqC3Zx7F-btOhlPkRAQNyzsctlSHSGFTdU760qDrVj1ePVsHk4EC7hYdUYBbEjvEvS0MXWFWnYIvI6JI95fIPCecbiKD3NruTfGY8Rc9Z0gXLBmvmgD4yoLaFoMKFzYvidpHHJ24n3C3rfyjWZboOzl_p6BQn2NUfWNd7vQwO3amWAbdzdVRkdp1eXJZT6ZGmZEbRzplX5dFu5V1_34apTZZeKneQkNMzPgfiTK268Idi2CmEMqi0riLuVvIvKjwMxI47kL5Bxd0oFdPfoaZt5cOFsBHv0J3VRazPx8W93iv5KisBla0Q_Xs8wWE5p7WbXtM491saWIQTJHXekgOMNT2ja5rxx2PZijzspl6SKBrBQq7BBB6FUZqH5ARwwI5bAV7cpM13UN4qwC5KhOJ4uV5rFals1H380DogndS7GTR-jbCSHf6GtaES_NzGbWV3QDaEZw_F2GZl-lLafzi1GJHR-4qCqkkybCIYKZ_PE1--fwOyQ3zE8crJvOmKF7iUAle3VL1DwneguQxjdPBysqS2Jg58YuvBrWhhXHIFmTDS4cGuyXcH6RZCgNiR4TLZ2QCIjPNUzU_15jkRcLibPjYzl1H4DIw5A92NwP0wcMcUDJXtqoUnUOqJUmfIBw5egoXChJrbeLArNQv4XW9VVvxusAmr4_7Ll2I89qfVszjMaI5czOGznLjB7alKWg7gqAVo2irIIARehTT7Jd_7d36Mi6Bsj4X4F4EFQoZxqQX-kM1Hs-ynmHLJ_B9zhaEpC0fVw_9rPg7eRXW6KTCuvuHsuq53Sf3uxV3MdKGO2ZhC3ersPm4HCZ7pgDf-LIYQ7tYgIG_HX30wrfOuqKwo1Hds8IzbYWoeA=w720-h456-no?authuser=0">
+        </div>
+      <p class="w3-xlarge">Josh Philippe</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      <button class="w3-button w3-black w3-padding-large">View Profile</button>
+
+    </div>
+    <div class="w3-quarter centered w3-center">
+        <div class="image-cropper round centered">
+            <img src="https://lh3.googleusercontent.com/vpnPvfSjJBd-9qgUzvS2_jMyrOoaDvAyrBrBvPYfoPQILWd_SoKQJ6EpO9nrN1FNcm1RAfg28VtZ5n1GNMpaDSlOZkVDBlgubWaM6WwJ2QOVq7hc2k9gakdcm9g-1ITPRsAWN8It87-SQgRaBS7EKJhRfkGOYhvvdavyl0lCP-tPWHL1RFFKbnDSfakiamxXCBtY5fbRpaxaxeiHzBybK-ICyewer9vLcSZE0LMUfVdNEL1p3Kzux3EP2fTDXYPtw5GBWSJq24sDR6Izn3-lN2wkILjFgim9tfgcpD8Y7kdzm6zRzICyLv0skya-ekHxq5hGbxq1pFHha4tDsd0iDbVF4kb7OYonr6WdQiL-gso4alRZ0twhj-D5kLqYC3E09WXkncnharIOxXA8_FI-Te0vM7cTlxi7bHvjTQuGxEz8Exedck5bju24upzSwhI1rLYCXLvepdh5aD1qJ7edgLiG9c03q5bK5hVwW5A5lp6QHxs-eRp0iTP2kYQwUCGM9yGix4Zt8jk3Jiu90mehwPMrWpkwEtf1zAy1BPM83vQ2cYpLPrn6gyJLuX9ex75x5gP6WHo9-C8Rfyy8CY3JBD4Q9OYHJaRibv_E3DkPS133kLLT14slOjID29m-nT0UWSSZw894wSLTxKVKmUWydTGks5S2w4e3aFBOjdnL1WiRlSG1g5k8KBK_S1O_YC4brYMx7gGkZU6j9CPkEVxBBC--oU9kiZebLCpIp9ubW26fHVwyaa4cHT6KlKRBx-gOEmk2Xs2yuG4ZMGiC9Weus0evyZYJCcCF8a_D_Qa3aoyKv5Jjhufx0_JzBNZIeYJcArSXalfQFhCTdlb5QNsOe4ShcoVIqja7oPMsRCqmzn3Kfd4zSI73-RNsI-KX8n3tCbOoIgsWgGxeSiYS8iC63fMICD_VHyCyr8qxuvKk4_HeOMhfdruH8SxDPsGu2vZ-oktXrW0PYQUvKA1PE14=w639-h893-no?authuser=0">
+        </div>
+      <p class="w3-xlarge">Tom Banton</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      <button class="w3-button w3-black w3-padding-large">View Profile</button>
+
+    </div>
+  </div>
+</div>
+<hr>
+
+
+<!--Don't give them the meeting link unless they've RSVP'd-->
+
+<!-- Agenda section -->
+<div class="w3-container w3-row w3-center centered w3-dark-grey w3-padding-64">
+    <h1 class="w3-xxxlarge w3-center">Agenda</h1>
+
+    <div class="agenda">
+        <h2>Day 1</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+
+    <div class="agenda">
+        <h2>Day 2</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+
+</div>
+
+
+
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-64">
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <div class="w3-xlarge w3-section">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+ 
+<script>
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+  } else {
+    mySidebar.style.display = 'block';
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+</script>
+
+</body>
+</html>
