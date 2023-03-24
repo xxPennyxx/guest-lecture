@@ -18,6 +18,7 @@ let currEvents=[];
 let numSpeakers=0;
 let getSpeakers=[];
 let currEvent="";
+let currEvents2=[];
 
 const userSchema = {
   username:{
@@ -212,7 +213,7 @@ app.get("/",function(req,res){
   });
 
   app.get("/login",function(req,res){
-    res.render("login");
+    res.render("login",{currUsers1:currUsers});
   
   
   });
@@ -254,6 +255,11 @@ app.get("/",function(req,res){
     const loginpwd=req.body.password;
     console.log(loginUname)
     console.log(loginpwd)
+
+    Event.find().then(function(e){
+      console.log(e);
+      currEvents2=e;
+    })
     if(loginUname!="admin"){
     var LoggedInUsers=User.find({username:loginUname, confirmps: loginpwd}).then(function(foundItems){
       if(foundItems.length===0){  
@@ -263,6 +269,8 @@ app.get("/",function(req,res){
       else
       {
         //console.log("YAY")
+        currUsers=(foundItems);
+        console.log(currUsers);
         res.redirect("/dashboard");
       }
 
@@ -276,11 +284,11 @@ app.get("/",function(req,res){
   })
 
   app.get("/dashboard",function(req,res){
-    res.render("dashboard",{currUsers1:currUsers});
+    res.render("dashboard",{currUsers1:currUsers, eventList:currEvents2});
   })
 
   app.get("/admin",function(req,res){
-    res.render("admin");
+    res.render("admin",{eventList:currEvents2});
   })
 
 
@@ -413,6 +421,11 @@ app.get("/",function(req,res){
     console.log(getSpeakers);
     //Speaker.insertMany(getSpeakers);//add the new speakers into the speakers pool
     Event.updateOne({name:currEvent2},{speakers:getSpeakers}).exec();
+
+    Event.find().then(function(e){
+      console.log(e);
+      currEvents2=e;
+    })
     res.redirect("/admin");
   }
   else{
