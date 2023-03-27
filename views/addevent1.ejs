@@ -6,10 +6,10 @@
 
         <!-- If it's online, hide the venue; if offline, hide the link. If hybrid, keep both-->
 
-        <% if(currEvents1[currEvents1.length-1].mode==='online'){ %>
+        <% if(currEvents1[currEvents1.length-1].mode==='Online'){ %>
 
           <p><label class="w3-xlarge" for="link">Virtual event link (YouTube, Meet, Webex or Teams)</label></p><input class="w3-input w3-border" id="link" type="text" placeholder="eg. https://youtu.be/linkhere" required name="link">
-          <% } else if(currEvents1[currEvents1.length-1].mode==='offline'){%>
+          <% } else if(currEvents1[currEvents1.length-1].mode==='Offline'){%>
           <p><label class="w3-xlarge" for="venue">Venue</label></p><textarea class="w3-input w3-border" id="venue" placeholder="eg. Seminar Hall I, AB3, Amrita School of Computing, Amrita Vishwa Vidyapeetham, Coimbatore, TN" rows="2" required name="venue"></textarea>
 
           <% } else { %>

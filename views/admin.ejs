@@ -25,13 +25,13 @@
       <span class="w3-xxlarge"><%= i.name %></span><br><br>
 
       <% if(i.days!=1) {%>
-      <span class="w3-large">Date: <%= i.startdate %> - <%= i.enddate %> </span><br>
+      <span class="w3-large">Date: <%= new Date(i.startdate).toDateString() %> - <%= new Date(i.enddate).toDateString() %> </span><br>
       <% }else{ %>
       <span class="w3-large">Date: <%= i.startdate %> </span><br>
       <% }%>
 
-
-      <span class="w3-large">Time:  <%= i.starttime %> -  <%= i.endtime %></span><br>
+      
+      <span class="w3-large">Time:  <%= i.starttime%> -  <%= i.endtime %></span><br>
       <span class="w3-large"> Mode:  <%= i.mode %></span>
       <p><a href="/events/<%= i.name %>" class="w3-button w3-black"> View Details</a></p>
     </div>

@@ -61,7 +61,9 @@ const speakerSchema={
    linkedin:String,
    bio:String,
    imgURL:String,
-   company:String
+   company:String,
+   designation:String,
+   website:String
 }
 
 const eventSchema={
@@ -394,6 +396,8 @@ app.get("/",function(req,res){
     const linkedin=req.body.linkedin;
     const imgURL=req.body.imgURL;
     const company=req.body.company;
+    const website=req.body.website;
+    const designation=req.body.designation;
     const bio=req.body.bio;
     const currEvent2=req.body.submit;
     console.log(currEvent2);
@@ -409,7 +413,9 @@ app.get("/",function(req,res){
         bio:bio[j],
         linkedin:linkedin[j],
         imgURL:imgURL[j],
-        company:company[j]
+        company:company[j],
+        designation:designation[j],
+        website:website[j]
       };
 
       getSpeakers.push(s);
@@ -437,7 +443,9 @@ app.get("/",function(req,res){
         bio:bio,
         linkedin:linkedin,
         imgURL:imgURL,
-        company:company
+        company:company,
+        designation:designation,
+        website:website
       };
 
       getSpeakers.push(s1);
@@ -449,6 +457,16 @@ app.get("/",function(req,res){
 
   }
 
+  })
+
+
+  app.get("/events/:eventName",function(req,res){
+
+    const eventName=req.params.eventName;
+    Event.findOne({name:eventName}).then(function(currentEvent){
+      //console.log("I am at event "+currentEvent.name);
+      res.render("events",{event1:currentEvent});
+    })
   })
 
 app.listen(3000, function() {
