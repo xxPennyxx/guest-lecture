@@ -259,7 +259,7 @@ app.get("/",function(req,res){
     console.log(loginpwd)
 
     Event.find().then(function(e){
-      console.log(e);
+      //console.log(e);
       currEvents2=e;
     })
     if(loginUname!="admin"){
@@ -290,6 +290,10 @@ app.get("/",function(req,res){
   })
 
   app.get("/admin",function(req,res){
+
+    Event.find().then(function(e){
+      currEvents2=e;
+    })
     res.render("admin",{eventList:currEvents2});
   })
 
@@ -400,7 +404,9 @@ app.get("/",function(req,res){
     const designation=req.body.designation;
     const bio=req.body.bio;
     const currEvent2=req.body.submit;
-    console.log(currEvent2);
+    //console.log(currEvent2);
+
+    
 
 
     
@@ -419,20 +425,21 @@ app.get("/",function(req,res){
       };
 
       getSpeakers.push(s);
-      console.log(s);
+      //console.log(s);
+      Speaker.insertMany(s);
 
     }
 
     console.log("Our speakers:")
     console.log(getSpeakers);
-    //Speaker.insertMany(getSpeakers);//add the new speakers into the speakers pool
+    Speaker.insertMany(getSpeakers);//add the new speakers into the speakers pool
     Event.updateOne({name:currEvent2},{speakers:getSpeakers}).exec();
 
     Event.find().then(function(e){
       console.log(e);
       currEvents2=e;
     })
-    res.redirect("/admin");
+    res.redirect("/events/"+currEvent2);
   }
   else{
     
@@ -452,8 +459,10 @@ app.get("/",function(req,res){
       console.log(getSpeakers);
 
       Event.updateOne({name:currEvent2},{speakers:getSpeakers}).exec();
+      Speaker.insertMany(getSpeakers);//add the new speakers into the speakers pool
 
-    res.redirect("/admin");
+
+    res.redirect("/events/"+currEvent2);
 
   }
 
@@ -466,6 +475,15 @@ app.get("/",function(req,res){
     Event.findOne({name:eventName}).then(function(currentEvent){
       //console.log("I am at event "+currentEvent.name);
       res.render("events",{event1:currentEvent});
+    })
+  })
+
+  app.get("/speakers/:speakerName",function(req,res){
+
+    const speakerName=req.params.speakerName;
+    Speaker.findOne({speakername:speakerName}).then(function(currSpeaker){
+      console.log(currSpeaker);
+      res.render("speaker",{speaker1:currSpeaker});
     })
   })
 
