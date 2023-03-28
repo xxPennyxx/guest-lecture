@@ -1,0 +1,78 @@
+<%- include ("partials/dashboardHeaderAdmin") -%>
+<div class="w3-container w3-light-grey" style="padding:128px 32px; width:75%; margin:auto;" id="generalinfo">
+    <h3 class="w3-xxxlarge">2. Event Information</h3>
+    
+      <form action="/editevent1/<%= eventToEdit.name%>" method="POST">
+
+        <!-- If it's online, hide the venue; if offline, hide the link. If hybrid, keep both-->
+
+        <% if(eventToEdit.mode==='Online'){ %>
+
+          <p><label class="w3-xlarge" for="link">Virtual event link (YouTube, Meet, Webex or Teams)</label></p><input class="w3-input w3-border" id="link" type="text" value="<%= eventToEdit.link %>" required name="link">
+          <% } else if(eventToEdit.mode==='Offline'){%>
+          <p><label class="w3-xlarge" for="venue">Venue</label></p><textarea class="w3-input w3-border" id="venue" value="<%= eventToEdit.venue%>" rows="2" required name="venue"><%= eventToEdit.venue%></textarea>
+
+          <% } else { %>
+
+
+        <p><label class="w3-xlarge" for="link">Virtual event link (YouTube, Meet, Webex or Teams)</label></p><input class="w3-input w3-border" id="link" type="text" value="<%= eventToEdit.link%>" required name="link">
+        <p><label class="w3-xlarge" for="venue">Venue</label></p><textarea class="w3-input w3-border" id="venue" value="<%= eventToEdit.venue%>" rows="2" required name="venue"></textarea>
+            <%  } %>
+
+        <br>
+        <p><label class="w3-xxlarge" for="link">Agenda</label></p><br>
+
+
+<!-- Extending an event or postponing it keeping the days same-->
+
+      <%  if(daysBefore1 <= eventToEdit.days){ %>
+
+            <% for (let i=0;i<daysBefore1;i++) { %>
+
+
+                <p><label class="w3-large" for="day<%=(i+1)%>">Day <%= (i+1) %></label></p><textarea class="w3-input w3-border" rows=5 id="day<%=(i+1)%>" value="<%= eventToEdit.agenda[i] %>" required name="agenda"><%= eventToEdit.agenda[i] %></textarea>
+                <% } %>
+    
+                <% for (let i=daysBefore1;i<eventToEdit.days;i++) { %>
+    
+    
+                    <p><label class="w3-large" for="day<%=(i+1)%>">Day <%= (i+1) %></label></p><textarea class="w3-input w3-border" rows=5 id="day<%=(i+1)%>" value="" required name="agenda"></textarea>
+                    <% } %>
+
+
+<!--cutting an event short-->
+       <% } else { %>
+
+        <% for (let i=0;i<newDays1;i++) { %>
+
+            <p><label class="w3-large" for="day<%=(i+1)%>">Day <%= (i+1) %></label></p><textarea class="w3-input w3-border" rows=5 id="day<%=(i+1)%>" value="<%= eventToEdit.agenda[i] %>" required name="agenda"><%= eventToEdit.agenda[i] %></textarea>
+            <% } %>
+
+           
+    
+    
+    <% } %>
+        
+
+
+
+
+              <br>
+          <table style="width:120%">
+            <tr>
+
+            <td><p><label class="w3-xlarge" for="maxAttendees">Number of Seats</label></p><input style="width:40%" class="w3-input w3-border" id="maxAttendees" value="<%= eventToEdit.maxAttendees%>" type="number" min="0" max="500" required name="maxAttendees"></td>
+            <td><p><label class="w3-xlarge" for="numSpeakers">Number of Speakers</label></p><input style="width:40%" class="w3-input w3-border" id="numSpeakers" value="<%= eventToEdit.numSpeakers%>" type="number" min="0" max="4" required name="numSpeakers"></td>
+              </tr>
+          </table>
+        <p>
+          <button class="w3-button w3-black" name="submit" type="submit" value="<%= eventToEdit.name %>">
+            <i class="fa fa-check"></i> SAVE AND CONTINUE
+          </button>
+        </p>
+      </form>
+      
+    </div>
+  </div>
+
+ 

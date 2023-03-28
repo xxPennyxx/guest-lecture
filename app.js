@@ -3,8 +3,6 @@ let bodyParser=require('body-parser');
 let ejs = require("ejs");
 const mongoose=require('mongoose');
 
-
-
 let app=express();
 mongoose.set("strictQuery", false);
 mongoose.connect('mongodb://127.0.0.1:27017/guestDB');
@@ -19,6 +17,10 @@ let numSpeakers=0;
 let getSpeakers=[];
 let currEvent="";
 let currEvents2=[];
+let daysBefore;
+let newDays;
+let newNumSpeakers;
+
 
 const userSchema = {
   username:{
@@ -118,8 +120,6 @@ const eventSchema={
 const User = mongoose.model("User", userSchema);
 const Event = mongoose.model("Event", eventSchema);
 const Speaker = mongoose.model("Speaker", speakerSchema);
-
-
 
 
 app.get("/",function(req,res){
@@ -258,10 +258,7 @@ app.get("/",function(req,res){
     console.log(loginUname)
     console.log(loginpwd)
 
-    Event.find().then(function(e){
-      //console.log(e);
-      currEvents2=e;
-    })
+    
     if(loginUname!="admin"){
     var LoggedInUsers=User.find({username:loginUname, confirmps: loginpwd}).then(function(foundItems){
       if(foundItems.length===0){  
@@ -270,6 +267,11 @@ app.get("/",function(req,res){
       }
       else
       {
+
+        Event.find().then(function(e){
+          //console.log(e);
+          currEvents2=e;
+        })
         //console.log("YAY")
         currUsers=(foundItems);
         console.log(currUsers);
@@ -280,6 +282,11 @@ app.get("/",function(req,res){
     }
 
     else{
+
+      Event.find().then(function(e){
+        //console.log(e);
+        currEvents2=e;
+      })
       res.redirect("/admin");
     }
 
@@ -484,6 +491,207 @@ app.get("/",function(req,res){
     Speaker.findOne({speakername:speakerName}).then(function(currSpeaker){
       console.log(currSpeaker);
       res.render("speaker",{speaker1:currSpeaker});
+    })
+  })
+
+
+
+  app.get("/editevent/:eventName",function(req,res){
+    const eventName=req.params.eventName;
+    Event.findOne({name:eventName}).then(function(currentEvent){
+      res.render("editevent",{eventToEdit:currentEvent});
+    })
+  })
+
+
+
+
+
+
+
+  app.post("/editevent/:eventName",function(req,res){
+    const eventName=req.params.eventName;
+    
+    daysBefore=parseInt(req.body.daysBefore);
+    //console.log(daysBefore);
+    const updatedEvent={
+      name:req.body.name,
+      desc:req.body.desc,
+      desc1:req.body.desc1,
+      tags:req.body.tags,
+      imgURL:req.body.imgURL,
+      startdate:req.body.startdate,
+      enddate:req.body.enddate,
+      starttime:req.body.starttime,
+      endtime:req.body.endtime,
+      mode:req.body.mode,
+      days:(new Date(req.body.enddate).getDate()-new Date (req.body.startdate).getDate())+1
+    }
+
+   
+    Event.updateOne({name:eventName},updatedEvent).exec();
+    Event.findOne({name:req.body.name}).then(function(currentEvent){
+      //console.log("I am at event "+currentEvent.name);
+      newDays=currentEvent.days;
+
+      res.redirect("/editevent1/"+eventName);
+    })
+  })
+
+
+  app.get("/editevent1/:eventName",function(req,res){
+    const eventName=req.params.eventName;
+    Event.findOne({name:eventName}).then(function(currentEvent){
+      //console.log("I am at event "+currentEvent.name);
+      res.render("editevent1",{eventToEdit:currentEvent, daysBefore1:daysBefore, newDays1:newDays});
+    })
+  })
+
+
+
+  app.post("/editEvent1/:eventName",function(req,res){
+    
+    const eventName=req.params.eventName;
+    let newLink;
+    let newVenue;
+
+    //for online events
+    if(req.body.link && !(req.body.venue)){
+    newLink=req.body.link;
+    Event.updateOne({name:eventName},{
+      link:newLink,
+      agenda:req.body.agenda,
+      maxAttendees:req.body.maxAttendees,
+      numSpeakers:req.body.numSpeakers
+    }).exec();
+   }
+
+
+      //for offline events
+    if(req.body.venue && !(req.body.link)){
+      newVenue=req.body.venue;
+      Event.updateOne({name:eventName},{
+        venue:newVenue,
+        agenda:req.body.agenda,
+        maxAttendees:req.body.maxAttendees,
+        numSpeakers:req.body.numSpeakers
+      }).exec();
+    }
+
+
+         //for hybrid events
+
+    if(req.body.venue && (req.body.link)){
+      newVenue=req.body.venue;
+      newLink=req.body.link;
+      Event.updateOne({name:eventName},{
+        venue:newVenue,
+        link:newLink,
+        agenda:req.body.agenda,
+        maxAttendees:req.body.maxAttendees,
+        numSpeakers:req.body.numSpeakers
+      }).exec();    }
+
+
+         newNumSpeakers=req.body.numSpeakers;
+      res.redirect("/editspeakers/"+eventName);
+
+  })
+  
+
+  app.get("/editspeakers/:eventName",function(req,res){
+    const eventName=req.params.eventName;
+    Event.findOne({name:eventName}).then(function(currentEvent){
+      
+      res.render("editspeakers",{eventToEdit:currentEvent, numSpeakers1:newNumSpeakers});
+    })
+  })
+
+
+  app.post("/editspeakers/:eventName",function(req,res){
+    const eventName=req.params.eventName;
+
+    let speakers1=[];
+    
+    const speakerName=req.body.speakername;
+    const twitter=req.body.twitter;
+    const linkedin=req.body.linkedin;
+    const imgURL=req.body.imgURL;
+    const company=req.body.company;
+    const website=req.body.website;
+    const designation=req.body.designation;
+    const bio=req.body.bio;
+    const currEvent2=req.body.submit;
+    
+    if(numSpeakers>1){
+    for(let j=0;j<numSpeakers;j++){
+
+      var s={
+        speakername:speakerName[j],
+        twitter:twitter[j],
+        bio:bio[j],
+        linkedin:linkedin[j],
+        imgURL:imgURL[j],
+        company:company[j],
+        designation:designation[j],
+        website:website[j]
+      };
+
+      speakers1.push(s);
+      //console.log(s);
+      Speaker.updateMany({speakername:speakerName[j]},s);
+
+    }
+
+    // console.log("Our speakers:")
+    // console.log(getSpeakers);
+    Event.updateOne({name:currEvent2},{speakers:speakers1}).exec();
+
+    res.redirect("/events/"+eventName);
+  }
+  else{
+    
+
+      var s1={
+        speakername:speakerName,
+        twitter:twitter,
+        bio:bio,
+        linkedin:linkedin,
+        imgURL:imgURL,
+        company:company,
+        designation:designation,
+        website:website
+      };
+
+      speakers1.push(s1);
+
+      Event.updateOne({name:eventName},{speakers:getSpeakers}).exec();
+
+
+    res.redirect("/events/"+eventName);
+
+  }
+
+  })
+
+  app.get("/delete/:eventName",function(req,res){
+    const eventName=req.params.eventName;
+    Event.findOne({name:eventName}).then(function(currentEvent){
+      res.render("delete",{eventToDelete:currentEvent});
+    })
+  })
+
+
+  app.post("/delete/:eventName",function(req,res){
+    const eventName=req.params.eventName;
+    Event.deleteOne({name:eventName}).exec();
+
+    
+    Event.find().then(function(foundEvents){
+
+      currEvents=foundEvents;
+      res.redirect("/admin");
+
     })
   })
 

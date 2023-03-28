@@ -34,6 +34,10 @@
       <span class="w3-large">Time:  <%= i.starttime%> -  <%= i.endtime %></span><br>
       <span class="w3-large"> Mode:  <%= i.mode %></span>
       <p><a href="/events/<%= i.name %>" class="w3-button w3-black"> View Details</a></p>
+      <p><a href="/editevent/<%= i.name %>" class="w3-button w3-black"> Edit Event</a></p>
+      <p><a href="/delete/<%= i.name %>" class="w3-button w3-black"> Delete Event</a></p>
+
+
     </div>
     <div class="w3-col m6">
       <img class="w3-image w3-round-large" src="<%= i.imgURL %>" alt="Buildings" width="300" height="300">

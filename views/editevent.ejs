@@ -1,0 +1,108 @@
+<%- include ("partials/dashboardHeaderAdmin") -%>
+<div class="w3-container w3-light-grey" style="padding:128px 32px; width:75%; margin:auto;" id="generalinfo">
+    <h3 class="w3-xxxlarge">1. General Information</h3>
+    
+      <form action="/editevent/<%= eventToEdit.name%>" method="POST">
+        <p><label class="w3-xlarge" for="name">Name of Event</label></p><input class="w3-input w3-border" id="name" type="text"  required name="name" value="<%= eventToEdit.name%>">
+        <p><label class="w3-xlarge" for="desc">Short Description</label></p><textarea class="w3-input w3-border" id="desc"  name="desc" value="<%= eventToEdit.desc%>"><%= eventToEdit.desc%></textarea>
+        <p><label class="w3-xlarge" for="desc1">Detailed Description</label></p><textarea class="w3-input w3-border" id="desc1" rows=10  value="<%= eventToEdit.desc1%>" name="desc1"><%= eventToEdit.desc1%></textarea>
+
+        <p><label class="w3-xlarge" for="desc1">Add Tags</label></p>
+
+        <!-- Add more tags-->
+
+        <% var tags=["Machine Learning","Coding and Programming","Cyber Security","Research and Open Source","Culture and Heritage","Life Skills","Web and App Development","Internet of Things","Career Development and Entrepreneurship"]; %>
+
+       <% tags.forEach(function(t){ %>
+
+        <% if (eventToEdit.tags.includes(t)){ %>
+
+            <p><input type="checkbox" name="tags" id="<%= t %>" value="<%= t %>" checked> <label class="w3-large" for="<%= t %>"><%= t %></label></p>
+
+       <% } else { %>
+
+        <p><input type="checkbox" name="tags" id="<%= t %>" value="<%= t %>"> <label class="w3-large" for="<%= t %>"><%= t %></label></p>
+
+       <% } })%>
+
+        
+
+        <p><label class="w3-xlarge" for="imgURL">Add thumbnail image URL</label></p><input class="w3-input w3-border" id="imgURL" type="text"  name="imgURL" value="<%= eventToEdit.imgURL%>">
+        <table class="datetime" >
+        <tr>
+        <td><p><label class="w3-xlarge" for="startdate">Start date</label></p><input style="width:50%" class="w3-input w3-border" id="startdate" type="date"  name="startdate" value="<%= eventToEdit.startdate%>"></td>
+        <td><p><label class="w3-xlarge" for="starttime">Start time</label></p><input style="width:50%" class="w3-input w3-border" id="starttime" type="time" step="300"  name="starttime" value="<%= eventToEdit.starttime%>"></td>
+        </tr>
+
+        <tr>
+           <td><p><label class="w3-xlarge" for="enddate">End date</label></p><input style="width:50%" class="w3-input w3-border" id="enddate" type="date"  name="enddate" value="<%= eventToEdit.enddate%>"></td>
+           <td><p><label class="w3-xlarge" for="endtime">End time</label></p><input style="width:50%" class="w3-input w3-border" id="endtime" type="time" step="300"  name="endtime" value="<%= eventToEdit.endtime%>"></td>
+        </tr>
+
+    </table><br>
+
+    <% var modes=["Online","Offline","Hybrid"]; %>
+
+    <input type="hidden" name="daysBefore" value="<%= eventToEdit.days%>">
+    <!--Agenda, including venue/meeting link will be added after submission of basic event details-->
+    <span class="w3-xlarge">Mode of Event</span>
+    <table class="mode1">
+        <tr>
+    
+    <% modes.forEach(function(m){ %>
+
+            
+        <% if(eventToEdit.mode===m){ %>
+
+            <td><p class="w3-large"><%= m %><input class="w3-input w3-border" id="<%= m %>" value="<%= m %>" type="radio" checked name="mode"></p></td>
+
+       <% } else{ %>
+
+        <td><p class="w3-large"><%= m %><input class="w3-input w3-border" id="<%= m %>" value="<%= m %>" type="radio"  name="mode"></p></td>
+
+    <%}}) %>
+            </tr>
+    </table>
+
+
+        <p>
+          <button class="w3-button w3-black" type="submit">
+            <i class="fa fa-check"></i> SAVE AND CONTINUE
+          </button>
+        </p>
+      </form>
+      <!-- Image of location/map -->
+      
+    </div>
+  </div>
+
+ <style>
+
+#generalinfo{
+    padding:20px
+}
+
+input[type=checkbox]{
+    height: 1.25rem;
+    width: 1.25rem;
+    color: black;
+  }
+
+  input[type=radio]{
+    height: 1.25rem;
+    width: 1.25rem;
+    color: black;
+
+  }
+  .datetime{
+    width:100%
+  }
+
+  .mode1{
+    width:75%
+  }
+ </style>
+
+ 
+ </body>
+ </html>
