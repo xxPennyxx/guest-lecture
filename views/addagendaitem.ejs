@@ -1,0 +1,33 @@
+<%- include ("partials/dashboardHeaderAdmin") -%>
+<div class="w3-container w3-light-grey" style="padding:128px 32px; width:75%; margin:auto;" id="generalinfo">
+    <h3 class="w3-xxxlarge">Add Agenda Item</h3>
+    
+      <form action="/addagendaitem" method="POST">
+
+    <table>
+        <tr>
+            <td><p><label class="w3-xlarge" for="starttime">Start time</label></p><input style="width:100%" class="w3-input w3-border" id="starttime" type="text" name="starttime"></td>
+            <td><p><label class="w3-xlarge" for="endtime">End time</label></p><input style="width:100%" class="w3-input w3-border" id="endtime" type="text" name="endtime"></td>
+            </tr>
+    </table>
+
+    <p><label class="w3-xlarge" for="item">Item</label></p><textarea class="w3-input w3-border" id="item" placeholder="Add agenda item here." rows="2" required name="item"></textarea>
+
+
+         
+
+
+
+
+
+        
+          <button class="w3-button w3-black" name="submit" type="submit" value="<%= currEvents1.name %>">
+            <i class="fa fa-check"></i> SAVE AND CONTINUE
+          </button>
+        </p>
+      </form>
+      
+    </div>
+  </div>
+
+ 

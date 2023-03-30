@@ -1,47 +1,41 @@
 <%- include ("partials/dashboardHeaderAdmin") -%>
 <div class="w3-container w3-light-grey" style="padding:128px 32px; width:75%; margin:auto;" id="generalinfo">
-    <h3 class="w3-xxxlarge">3. Speakers and Partners Information</h3>
+    <h3 class="w3-xxxlarge">Add Speaker</h3>
     
-      <form action="/addspeaker" method="POST">
+      <form action="/events/<%= currEvent1.name%>/addspeaker" method="POST">
 
      <br>
         <p><label class="w3-xxlarge">Speaker Information</label></p><br>
-
-
-        <% for (let i=0;i<numSpeakers1;i++) { %>
-
-            <p class="w3-xlarge">Speaker <%= (i+1) %></p>
             
             
             
-            <p><label class="w3-large" for="speakername<%=(i+1)%>">Name of Speaker</label></p>
-            <input class="w3-input w3-border" id="speakername<%=(i+1)%>" placeholder="eg. John Smith" required name="speakername"></input>
+            <p><label class="w3-large" for="speakername">Name of Speaker</label></p>
+            <input class="w3-input w3-border" id="speakername" placeholder="eg. John Smith" required name="speakername"></input>
 
-            <p><label class="w3-large" for="twitter<%=(i+1)%>">Twitter Handle</label></p>
-            <input class="w3-input w3-border" id="twitter<%=(i+1)%>" placeholder="eg. @johnsmith01" name="twitter"></input>
+            <p><label class="w3-large" for="twitter">Twitter Handle</label></p>
+            <input class="w3-input w3-border" id="twitter" placeholder="eg. @johnsmith01" name="twitter"></input>
 
-            <p><label class="w3-large" for="linkedin<%=(i+1)%>">LinkedIn profile</label></p>
-            <input class="w3-input w3-border" id="linkedin<%=(i+1)%>" placeholder="eg. https://www.linkedin.com/in/john-smith-a837g254/" name="linkedin"></input>
+            <p><label class="w3-large" for="linkedin">LinkedIn profile</label></p>
+            <input class="w3-input w3-border" id="linkedin" placeholder="eg. https://www.linkedin.com/in/john-smith-a837g254/" name="linkedin"></input>
 
-            <p><label class="w3-large" for="imgURL<%=(i+1)%>">Image URL</label></p>
-            <input class="w3-input w3-border" id="imgURL<%=(i+1)%>" placeholder="eg. https://someimages.com/image.png/" name="imgURL"></input>
+            <p><label class="w3-large" for="imgURL">Image URL</label></p>
+            <input class="w3-input w3-border" id="imgURL" placeholder="eg. https://someimages.com/image.png/" name="imgURL"></input>
             
-            <p><label class="w3-large" for="company<%=(i+1)%>">Company</label></p>
-            <input class="w3-input w3-border" id="company<%=(i+1)%>" name="company"></input>
+            <p><label class="w3-large" for="company">Company</label></p>
+            <input class="w3-input w3-border" id="company" name="company"></input>
 
-            <p><label class="w3-large" for="designation<%=(i+1)%>">Designation</label></p>
-            <input class="w3-input w3-border" id="designation<%=(i+1)%>" name="designation"></input>
+            <p><label class="w3-large" for="designation">Designation</label></p>
+            <input class="w3-input w3-border" id="designation" name="designation"></input>
 
-            <p><label class="w3-large" for="website<%=(i+1)%>">Website</label></p>
-            <input class="w3-input w3-border" id="website<%=(i+1)%>" name="website"></input>
+            <p><label class="w3-large" for="website">Website</label></p>
+            <input class="w3-input w3-border" id="website" name="website"></input>
 
-            <p><label class="w3-large" for="twitter<%=(i+1)%>">Short biography</label></p>
-            <textarea class="w3-input w3-border" id="bio<%=(i+1)%>" placeholder="" rows="10" name="bio"></textarea>
-            <% } %>
+            <p><label class="w3-large" for="twitter">Short biography</label></p>
+            <textarea class="w3-input w3-border" id="bio" placeholder="" rows="10" name="bio"></textarea>
               <br>
           
         <p>
-          <button class="w3-button w3-black" name="submit" type="submit" value="<%= currEvent1%>">
+          <button class="w3-button w3-black" name="submit" type="submit" value="<%= currEvent1.name%>">
             <i class="fa fa-check"></i> SAVE AND CONTINUE
           </button>
         </p>

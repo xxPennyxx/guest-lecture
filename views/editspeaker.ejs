@@ -1,0 +1,47 @@
+<%- include ("partials/dashboardHeaderAdmin") -%>
+<div class="w3-container w3-light-grey" style="padding:128px 32px; width:75%; margin:auto;" id="generalinfo">
+    <h3 class="w3-xxxlarge">Add Speaker</h3>
+    
+      <form action="/speakers/<%= currSpeaker1.speakername%>/edit" method="POST">
+
+     <br>
+        <p><label class="w3-xxlarge">Speaker Information</label></p><br>
+            
+            
+            
+            <p><label class="w3-large" for="speakername">Name of Speaker</label></p>
+            <input class="w3-input w3-border" id="speakername" placeholder="eg. John Smith" value="<%= currSpeaker1.speakername%>" required name="speakername"></input>
+
+            <p><label class="w3-large" for="twitter">Twitter Handle</label></p>
+            <input class="w3-input w3-border" id="twitter" placeholder="eg. @johnsmith01" value="<%= currSpeaker1.twitter%>" name="twitter"></input>
+
+            <p><label class="w3-large" for="linkedin">LinkedIn profile</label></p>
+            <input class="w3-input w3-border" id="linkedin" value="<%= currSpeaker1.linkedin%>" placeholder="eg. https://www.linkedin.com/in/john-smith-a837g254/" name="linkedin"></input>
+
+            <p><label class="w3-large" for="imgURL">Image URL</label></p>
+            <input class="w3-input w3-border" id="imgURL" value="<%= currSpeaker1.imgURL%>" placeholder="eg. https://someimages.com/image.png/" name="imgURL"></input>
+            
+            <p><label class="w3-large" for="company">Company</label></p>
+            <input class="w3-input w3-border" id="company" value="<%= currSpeaker1.company%>" name="company"></input>
+
+            <p><label class="w3-large" for="designation">Designation</label></p>
+            <input class="w3-input w3-border" id="designation" value="<%= currSpeaker1.designation%>" name="designation"></input>
+
+            <p><label class="w3-large" for="website">Website</label></p>
+            <input class="w3-input w3-border" id="website" value="<%= currSpeaker1.website%>" name="website"></input>
+
+            <p><label class="w3-large" for="twitter">Short biography</label></p>
+            <textarea class="w3-input w3-border" id="bio" placeholder="" rows="10" name="bio"><%= currSpeaker1.bio%></textarea>
+              <br>
+          
+        <p>
+          <button class="w3-button w3-black" name="submit" type="submit" value="<%= currSpeaker1.speakername%>">
+            <i class="fa fa-check"></i> SAVE AND CONTINUE
+          </button>
+        </p>
+      </form>
+      
+    </div>
+  </div>
+
+ 

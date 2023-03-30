@@ -78,11 +78,10 @@ margin-bottom:7.5px;
     <a href="#home" class="w3-bar-item w3-button w3-wide">LOGO</a>
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
-      <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
-      <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> TEAM</a>
-      <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> WORK</a>
-      <a href="#pricing" class="w3-bar-item w3-button"><i class="fa fa-usd"></i> PRICING</a>
+      <a href="" class="w3-bar-item w3-button">Welcome, <b>Admin</b></a>
+      <a href="#feedback" class="w3-bar-item w3-button"><i class="fa fa-question"></i> FEEDBACK</a>
       <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+      <a href="/" class="w3-bar-item w3-button"><i class="fa fa-arrow-right"></i> LOG OUT</a>
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -145,10 +144,19 @@ margin-bottom:7.5px;
 </header>
 
 <!-- About Section -->
-<div class="w3-container" style="padding:128px 16px" id="about">
-  <h1 class="w3-xxxlarge w3-center">About this event</h2>
+
+
+<div class="w3-container w3-row w3-center centered w3-dark-grey w3-padding-64">
+  <h1 class="w3-xxxlarge w3-center">About this event</h1>
+
   <p class="w3-center w3-large" style="margin: 0 5rem"> <%= event1.desc1 %></p>
+
+  <br><br>
+
+
 </div>
+
+
 
 
 
@@ -167,12 +175,20 @@ margin-bottom:7.5px;
             </div>
           <p class="w3-xlarge"><%=s.speakername%></p>
           <p><%=s.designation%>, <%=s.company%></p><br>
-          <a class="w3-button w3-black w3-padding-large" href="/speakers/<%=s.speakername%>">View Profile</a>
+          <a class="w3-button w3-black w3-padding-large" href="/speakers/<%=s.speakername%>">View Profile</a><br><br>
+          <a class="w3-button w3-black w3-padding-large" href="/speakers/<%=s.speakername%>/edit">Edit Profile</a>
+
         </div> <br><br><br>
 
 
 
    <% }) %>
+
+
+
+    <a class="w3-button w3-black"  href="/events/<%=event1.name%>/addspeaker">
+      <i class="fa fa-plus"></i>  Add speaker
+    </a>
     
    
     
@@ -184,30 +200,16 @@ margin-bottom:7.5px;
 
 <!--Don't give them the meeting link unless they've RSVP'd-->
 
-<!-- Agenda section -->
-<div class="w3-container w3-row w3-center centered w3-dark-grey w3-padding-64">
-    <h1 class="w3-xxxlarge w3-center">Agenda</h1>
-    <% for(let i=0;i<event1.agenda.length;i++) {%>
 
-    <div class="agenda">
-        <h2>Day <%=i+1 %></h2>
-        <p><%= event1.agenda[i] %></p>
-    </div>
-
-    <% } %>
-
-    
-    <a href="/admin" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>Back to dashboard</a>
-
-
-</div>
 
 
 
 
 <!-- Footer -->
 <footer class="w3-center w3-black w3-padding-64">
-  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a><br><br>
+  <a href="/admin" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>Back to dashboard</a>
+
   <div class="w3-xlarge w3-section">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>
     <i class="fa fa-instagram w3-hover-opacity"></i>

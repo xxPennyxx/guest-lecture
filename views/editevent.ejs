@@ -1,11 +1,11 @@
 <%- include ("partials/dashboardHeaderAdmin") -%>
 <div class="w3-container w3-light-grey" style="padding:128px 32px; width:75%; margin:auto;" id="generalinfo">
-    <h3 class="w3-xxxlarge">1. General Information</h3>
+    <h3 class="w3-xxxlarge">General Information</h3>
     
       <form action="/editevent/<%= eventToEdit.name%>" method="POST">
         <p><label class="w3-xlarge" for="name">Name of Event</label></p><input class="w3-input w3-border" id="name" type="text"  required name="name" value="<%= eventToEdit.name%>">
         <p><label class="w3-xlarge" for="desc">Short Description</label></p><textarea class="w3-input w3-border" id="desc"  name="desc" value="<%= eventToEdit.desc%>"><%= eventToEdit.desc%></textarea>
-        <p><label class="w3-xlarge" for="desc1">Detailed Description</label></p><textarea class="w3-input w3-border" id="desc1" rows=10  value="<%= eventToEdit.desc1%>" name="desc1"><%= eventToEdit.desc1%></textarea>
+        <p><label class="w3-xlarge" for="desc1">Detailed Description</label></p><textarea class="w3-input w3-border" id="desc1" rows=10 placeholder="A more detailed description on the event, including the agenda."  value="<%= eventToEdit.desc1%>" name="desc1"><%= eventToEdit.desc1%></textarea>
 
         <p><label class="w3-xlarge" for="desc1">Add Tags</label></p>
 
@@ -63,6 +63,17 @@
     <%}}) %>
             </tr>
     </table>
+
+    <table style="width:120%">
+      <tr>
+
+      <td><p><label class="w3-xlarge" for="maxAttendees">Number of Seats</label></p><input style="width:20%" class="w3-input w3-border" value="<%= eventToEdit.maxAttendees%>" id="maxAttendees" type="number" min="0" max="500" required name="maxAttendees"></td>
+        </tr>
+    </table>
+
+    <p><label class="w3-xlarge" for="link">Virtual event link (YouTube, Meet, Webex or Teams)</label></p><input class="w3-input w3-border" value="<%= eventToEdit.link%>" id="link" type="text" placeholder="If it is a fully offline event, type N/A" required name="link">
+        <p><label class="w3-xlarge" for="venue">Venue</label></p><textarea class="w3-input w3-border" id="venue" value="<%= eventToEdit.venue%>" placeholder="If it is a fully online event, type N/A" rows="2" required name="venue"><%= eventToEdit.venue%></textarea>
+
 
 
         <p>

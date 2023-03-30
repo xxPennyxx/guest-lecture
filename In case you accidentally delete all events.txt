@@ -1,47 +1,46 @@
-db.events.insertOne({
-    name: 'Rocket League tournament',
-    desc: "Teams of upto four compete heads-up for the ultimate Rocketeers' Championship",
-    desc1: 'Please register your team name alongwith your members and select your team captain on or before 23rd March, 2023.',
-    tags: [ 'life' ],
-    imgURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Rocket_League_coverart.jpg/768px-Rocket_League_coverart.jpg',
-    startdate: '2023-03-24',
-    enddate: '2023-03-31',
-    starttime: '14:00',
-    endtime: '20:00',
-    mode: 'online',
-    days: 8,
-    agenda: [
-      'Same old bullshit',
-      'Same old bullshit',
-      'Same old bullshit',
-      'Same old bullshit',
-      'Same old bullshit',
-      'Same old bullshit',
-      'Same old bullshit',
-      'Same old bullshit'
-    ],
+
+  {
+    _id: ObjectId("64256dec6691c1558700a9eb"),
+    name: 'TEDxChamps4Grabs',
+    desc: 'This is an independently-organized TEDx event by the Australian community Champs 4 Grabs, curated and led by Jake Weatherald, an Australian cricketer.',   
+    desc1: 'I applied for a license from TED, and am working with TED to secure a Studio/TEDx event license for me and my team.\r\n' +
+      'Formed my team with Travis Head and Steve Terreberry as my co-curators and Jhye Richardson and Co. heading their respective departments. You know them quite well xD\r\n' +
+      'My mentor? Jake Weatherald himself… 😜\r\n' +
+      'The timeline is February-October, with the initial months covering TED talks featuring celebs from all over the world, plus mini-events like scavenger hunts, open mics, quizzes and much more.\r\n' +
+      'The final day shall take place in October, and shall feature a myriad of events, including a meet-and-greet, live performance, and display of all the talks filmed during the season.',
+    tags: [ 'Life Skills', 'Internet of Things' ],
+    imgURL: 'https://yt3.googleusercontent.com/ytc/AL5GRJUfOfVXNfonbB33lrQOb0d5R5FQVBt87N3BFp1D9Q=s900-c-k-c0x00ffffff-no-rj',
+    startdate: '2023-10-07',
+    enddate: '2023-10-08',
+    starttime: '19:00',
+    endtime: '22:00',
+    mode: 'Hybrid',
+    link: 'https://youtu.be/dQw4w9WgXcQ',
+    venue: 'The Great Southern Hotel Perth, 15 Robinson Ave, Perth WA 6000, Australia',
+    maxAttendees: 500,
     speakers: [
       {
         speakername: 'Jake Weatherald',
         twitter: '@weatheraldj',
-        linkedin: 'IDK',
-        bio: 'Jake Weatherald (born 4 November 1994) is an Australian cricketer who plays as an opening batsman in domestic level for South Australia and the Adelaide Strikers. He is also the CEO of a startup, Champs 4 Grabs, which he co-founded with teammates Travis Head and Alex Carey. \r\n' +
-        imgURL: 'https://lh3.googleusercontent.com/UG6jJjvn4H_XMIOorZxR8y1iGp6axOgL7Nx1XtQRSlwu017M8dt2m8iiaRv_trxcnT9F3He0LKLOY6YVHBZuec8bmLYiMKBul5Y03g-T8khEB9ssnpa9xqVsXMi751gj_d_o1XjVRtaLMpM9LlVcoULtPuweNsaMmqe-Zl5vW8dsCnLkd7u0sBefho-kpW_uFKIWGArqf8LyHOoKt183tGlBLcd3vysN0xiWL9He1MAI0Pywjp7d_GBARTF4V5eLcX0hicpoO-Noq0IhB414YAYiUzKxoya6IE7wBtSjSmfyBmmTVyHCaTjIyLh4fgk4Qa25_lX1TLetQg_3X2B41jR6m5SE_11nJUjU0-Net2cJ08Dfa9zMk9XZ-YrhlWlDRDULQd3Ri4Fe4SS_SehCbhUYk4OuRc2NEioOaopDvonQcRndt9Wy0h1sf7QzDDqoLP4nZkxXwiUtjKmLKZDaBxGHbU2dyqzBw5MjaVZkVTrZ-U3IXBiPY_bu6v2BCHrZTQUHrDJiYvinCBpvrrcOt9OZunizqK7aACXZZRKpVFCg9LmQwCJHJfWQBGv3LUGH5afSisp0m0RflPfpHXe45mwzNgh6mF_So0z7KELbzi6DyE-6_BYrJveRO5vGPxOMn5SXkmGSBpsdIGrIdX48-BrmofWkIQNfKAL-HfD1va_O_2gIpWIg0wlG2eLBerkEif8wLDbtfjCOurDs0lYC2o7nQTPd05sDL2xitt_RImlk9fjmmy8kAIR8bAj-MzyKrUSeklhjAbeG9MfUKZ9wb85wsJERaamRig-B9lIzQKMol-JjOa610yLYhHjxMGVpHbx5zRhd-filwHQsUbbRyQTftO9-LWwfKHarFmQzRnuJoP4Km4M4Wxum-zyud5efmMNSrERnPBgLmgZEAlc-zHt9Q5vNSCXyeYbDi_5fpsPXrfewg5xA5NduWlA_FYC49Z1xc8vZ0nv67hqt-I4=s327-no?authuser=0',
+        linkedin: '?',
+        bio: 'Jake Weatherald (born 4 November 1994) is an Australian cricketer who plays as an opening batsman in domestic level for South Australia and the Adelaide Strikers. He is also the CEO of a startup, Champs 4 Grabs, which he co-founded with teammates Travis Head and Alex Carey. \r\n',
+        imgURL: 'https://lh3.googleusercontent.com/3EhKPhRsOwI3SP9DNOFCVG3sg5p1Zga-a0iEKuqB03jRXE99FV4u8zd6Svg8oH58v0fd9yTTgYqkOkpMgTx5ANW5Z1RjDNCmTNB15N0gowpu-Pk2p5RfArW_FNL1cMm7up5AcwQmblCmCM8GunRNTWhEoIPFesGesYB4cq0nuoOGEg3meys202pZFbJBUmCvXQfyEtiEVDU1UYtrStKw5DAxmloQDvnl2R2P6uyukB9RlVEVhzFNLW93yyUmiYAzgcGwVHjcJ65VW4OE2WlYhRLsICeV14uHUk4Ut2srnqQVtOwq2QNVyFmS23mFaL75BiTui5r25qpainsxkuB4ijBXMbt_344Jd5b3lfu0QdtGJYpZyngK7KWbYPh-rkaCa4M9OdJM7_w_RGdGEKeWKl5jorlTaSaDPtKZYYRiOOIsLAjH8cVPJ0J_rILvCUE7BjUX6VmZlziOa5H_x3VRBoZk3XKmOdHNbfpKPw7Dr4V5pImFiR8iz7ov_nP0fQC9XLdllXQuYwmcHMZhihqyKSNfjd97rKWPU21OFqbUBE7iQ3_GiOlIT9LC1VWT1wVjgms7mAcIjbIZcVTogYmCL_CVf0xYxpncMMrrtNoMkj3kQa_aZHFNvfppsD1PAFRy4i8UeSdmZkYMRXFDw_f7Z2PEep3udfvBzBbV5RrOZi8HYjrNxkZ8kMwcTEHME4aRcRmmf1hLYlit0j8lEFoRpPCrZO6T-_I_EhXr-KroUSIlDRtGLqNG0vJhwB033TFBKIIYdaLJLSWj6ST3mjdf09o2F3mZMSrDjvTGVhMiRH_hfZRWv5gBJxvoTHLnvGgTiuv4-eaDknSC1P-y4OgDgVNW5rM31NEG3TJAe7LfB8jdSkrQAxXZO7qUooJLM-_75YqZARzss7k0bTapyShAvgNbfFrpqDFicgglAEMFoPSoJANsgYrP72gHIiC3YvYwMRuWBBZUpItgr75lOLY=w327-h327-s-no?authuser=0',
         company: 'Adelaide Strikers',
-        _id: ObjectId("641db209b153c47df91f8bff")
+        designation: 'Batter',
+        website: 'https://c4g.com.au',
+        _id: ObjectId("64256eae6691c1558700a9f2")
       },
       {
         speakername: 'Jhye Richardson',
         twitter: '@jhyericho',
         linkedin: '',
-        bio: 'Jhye Avon Richardson (born 20 September 1996) is an Australian cricketer who plays as a fast bowling allrounder for Australia, Western Australia and Perth Scorchers. \r\n' +
-        imgURL: 'https://lh3.googleusercontent.com/eVXZMcBUiTc5SWj0zNIJygs-8v825wrKEnrGQk4pCat5LmcEC5BjBLbFRaYv_0XOipfvBx9zQJX6OC0PM-UZFtgHVR64StHxCPEttf3-PyXuNbJFIJMMd-iGQagSvlA-icBzPWEvge23hSitvY_vRet9DG3-aKF3rOOo0Y3o1E0dgL_P8eLDnHxRdoMzOia9wK9TU0QFU-x4zdwx0de_D_pRJAAd-5OtR7Pilu8zpK8hqaw8HxhxAXuXIsPKkqhMGU-DWqtfoPe0MdMP-Lnu1zE5SM9klZ4WGuuc4pxfNT3Qf6CTvsi9RkA0Ttnc1hcyHugyh42NdBT53dt1G5aC7qftfVmuo6O0wuAqAeYqRKzBX48ODZztbNTn1woWEG51-5OxIFKg-9qWThNjghCV7Lt8BriAD3vB1_7hVZCiqcZh0VQEHosJcZ_hMh6ctXIWSaZHsBy548cqc-AEw8MdA8_dn8uyDkBKSBc2ttjoaS_aiOHJ7FbGFzKw0VYcgFmcuJupOdOxRyAVdnuq-cgqnS8bz-EK6G8rbahGlLuEGdRAwMZfV7pkTY1_bcAgEiqJwH1oDq5qkP3e1GABmVNdReNUQWABoJWxlqmtbcvtasGEUGvBup-J9P9aUMs5N5cuhuSPA5MZoGa4nlcIpZOlwIX3j-XvYpeiP8OPVNpb-39mOq9eXLHUhaCpx9jt9fqnQJhK2hm1dlVWsN2oKujOJWlXI5PcJuk80zWFvKgaV3c1HqBT8uYtJJm1vnu0KciI9BmDEV8DvUS5g6zeFYHtNmZbkTmKB3u2_a1tAP4S39RAWdhLaVbqmM4HM6Vs45zivzta9m4J5mw1AxT5YgWimG4wznedOQB5Dv_xZF5BCI3qLBDhdy3oRV6RGX3MwYBEKWregexJ6XIiAL9UXfbiw8XhyXo1dRXrH7EjvEpyqn1Co3tD_dgfpuKO-mBDdnoOpFZ0_ImWR5p9AYNAr3c=w677-h579-no?authuser=0',
+        bio: "Jhye Avon Richardson (born 20 September 1996) is an Australian cricketer who plays as a fast bowling allrounder for Australia, Western Australia, Perth Scorchers and Mumbai Indians. Richardson is a free-spirited youngster who swears by his coach Justin Langer's success mantras. ",
+        imgURL: 'https://lh3.googleusercontent.com/Bm9VkNNWjkjCFUhqzBys59D29N1lZyisoUfw-540Xj_kgi08sGq0y_jqRFS3LBNCcXTfRw5zRJBKOsNiC3HvHk2KhprN_Beui5VJ6IbOdTRdQ6j829ktAX9pGOITHlXq3lcbv7vl-CWmjBtgnOvgTUbCWgYXcSPU6CF-HXqGWMPXD86A7dDW7XMb6FTCkB7RCPflkOYLqCsJo2aSt4ofbaUt2rACr9uplQ6uw0-KbyiyF7b5KMPkkGc1HuBgDgpkBlfl2jh-QXaSIYeYAHeQg1IPVeu5xTne7WzW1zCd8tLDE5M1GAK58hgnytG1WjfElPD_CAqLv8ZtVeUUfYy4avjUuFMplchI5N8iKculC9FrgiuPqkLkj_PfKu2HvTDKNHS65tc6V_jbL8UvoS5zou5TFnd6IpO5qTYAnbtwoyXqlfDBcMLmXkKjo_PH1i8-UxxvXLYWcTpnGx05YqGqdq_3xSK9Vd3vS-8LasEctbHPo9QuYuHfT0Kil-Brhe-X1_gcRp5fiwL6tJuQ7A4Nm6grI1RTmdOqhXyXTCTXJt-D6dJSocDXi62lMGUFG7Rmf9zzz-j_dp_4sPQ_qXMxanH_g9LrzrNm0RN6hgMpTTpK95ESjH_iX-G2AFIccdAAAWH_uxowBce8U1leDDNSodu3cYCYsctLjVc2I5hjmE0KGYgvFICENbp5DX86AHkYyeTx-NTyH43aNoQ3HUEV_YeUE4VfmIxmhVl97Jp9h6MAF8_t6AVec5J8cdhwMIFCQzms8kuV0CnWdUV2jZzhh8jTMUff_ytqo7NHAdfDDoeEs8jr2XDQynjZbjXJTp2MmCvk9GwOFgMn2HuF6PzgWs44PbrRojytze6RP8fNs0pKuC1WIPj2YmZ4OHGmpGMXqeCcV3T1OQS4adggzQ0PfWfcCJ53VYpo2rjEKwcTeZrepyBaA5PUtDYPncxhrn-aaBiWUrE9SxsOhPQTTXY=w677-h579-s-no?authuser=0',
         company: 'Perth Scorchers',
-        _id: ObjectId("641db209b153c47df91f8c00")
+        designation: 'Bowler',
+        website: 'https://jhyericho2.github.io',
+        _id: ObjectId("64256ef76691c1558700a9fa")
       }
     ],
-    __v: 0,
-    link: 'https://youtu.be.dQw4w9WgXcQ',
-    maxAttendees: 500,
-    numSpeakers: 2
-  })
+    __v: 0
+  }
