@@ -39,7 +39,7 @@ const userSchema = {
    required:[true, ""]
    },
   year:{
-    type: String
+    type: Number
    },
   dept:{
     type: String,
@@ -62,7 +62,8 @@ const speakerSchema={
    imgURL:String,
    company:String,
    designation:String,
-   website:String
+   website:String,
+   speakerEmail:String
 }
 
 const eventSchema={
@@ -160,7 +161,7 @@ app.get("/",function(req,res){
     const newPassword=req.body.createps;
     const newPassword1=req.body.confirmps;
      
-    if(newPassword===newPassword1)
+    if(newPassword===newPassword1 && validateEmailId(req.body.email))
     {
       const newUser =new User({
         username: newUsername,
@@ -188,7 +189,8 @@ app.get("/",function(req,res){
         
 
       });
-    }     
+    }  
+    else res.redirect("/signup")   
     
   })
 
@@ -207,28 +209,27 @@ app.get("/",function(req,res){
 
   app.post("/signup1",function(req,res){
 
-
-
-    const currUsername=req.body.confirm;
-    console.log(currUsername);
-
-    User.find({username:currUsername}).then(function(foundItems){
-
+    if(validateDepartmentYears(req.body.year, req.body.dept)){
+      const currUsername=req.body.confirm;
+    //console.log(currUsername);
+    User.findOne({username:currUsername}).then(function(foundItems){
       if(foundItems.length!=0){
-
+        
         const newYear=req.body.year;
         const newDept=req.body.dept;
-
         User.updateOne({username:currUsername},{
           year:newYear,
-          dept:newDept}).then(function(foundItems){
-
+          dept:newDept}).exec();
             res.redirect("/dashboard");
-          })
-        }
-           })
-  
-    })
+        
+        } }) }
+
+    else{
+      res.redirect("/signup1")
+    }  
+
+    //console.log(req.body.year,req.body.dept, req.body.confirm);
+  })
   
 
   app.post("/login",function(req,res){
@@ -268,14 +269,18 @@ app.get("/",function(req,res){
   })
 
   app.get("/dashboard",function(req,res){
-    res.render("dashboard",{currUsers1:currUsers, eventList:currEvents2});
+    Event.find().then(function(currEvents2){
+
+      res.render("dashboard",{currUsers1:currUsers, eventList:currEvents2});
+
+    })
   })
 
   app.get("/admin",function(req,res){
     Event.find().then(function(e){
-      currEvents2=e;
+      res.render("admin",{eventList:e});
+
     })
-    res.render("admin",{eventList:currEvents2});
   })
 
 
@@ -335,6 +340,17 @@ app.get("/",function(req,res){
     })
   })
 
+
+  app.get("/view-event/:eventName",function(req,res){
+
+    const eventName=req.params.eventName;
+    currentEvent=eventName;
+    Event.findOne({name:eventName}).then(function(currentEvent){
+      //console.log("I am at event "+currentEvent.name);
+      res.render("viewEvent",{event1:currentEvent});
+    })
+  })
+
   app.get("/speakers/:speakerName",function(req,res){
 
     const speakerName=req.params.speakerName;
@@ -356,7 +372,8 @@ app.get("/",function(req,res){
       company:req.body.company,
       designation:req.body.designation,
       website:req.body.website,
-      bio:req.body.bio
+      bio:req.body.bio,
+      speakerEmail:req.body.speakerEmail
 
     })
     newSpeaker.save();
@@ -390,7 +407,8 @@ app.get("/",function(req,res){
       company:req.body.company,
       bio:req.body.bio,
       imgURL:req.body.imgURL,
-      website:req.body.website
+      website:req.body.website,
+      speakerEmail:req.body.speakerEmail
     }
 
 
