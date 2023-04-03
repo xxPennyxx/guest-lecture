@@ -112,7 +112,8 @@ const eventSchema={
    venue:String,
    maxAttendees:Number,
    numSpeakers:Number,
-   speakers:[speakerSchema]
+   speakers:[speakerSchema],
+   attendeesList:[Object]
 }
 const User = mongoose.model("User", userSchema);
 const Event = mongoose.model("Event", eventSchema);
@@ -178,7 +179,6 @@ app.get("/",function(req,res){
         if(foundItems.length===0){
           currUsers.push(newUser);
           newUser.save();
-          console.log(currUsers);
           if(newUser.email.endsWith("cb.students.amrita.edu"))
           res.redirect("/signup1");
           else
@@ -211,7 +211,6 @@ app.get("/",function(req,res){
 
     if(validateDepartmentYears(req.body.year, req.body.dept)){
       const currUsername=req.body.confirm;
-    //console.log(currUsername);
     User.findOne({username:currUsername}).then(function(foundItems){
       if(foundItems.length!=0){
         
@@ -228,15 +227,13 @@ app.get("/",function(req,res){
       res.redirect("/signup1")
     }  
 
-    //console.log(req.body.year,req.body.dept, req.body.confirm);
   })
   
 
   app.post("/login",function(req,res){
     const loginUname=req.body.username;
     const loginpwd=req.body.password;
-    console.log(loginUname)
-    console.log(loginpwd)
+  
     
     if(loginUname!="admin"){
     var LoggedInUsers=User.find({username:loginUname, confirmps: loginpwd}).then(function(foundItems){
@@ -250,7 +247,7 @@ app.get("/",function(req,res){
           currEvents2=e;
         })
         currUsers=(foundItems);
-        console.log(currUsers);
+        //console.log(currUsers);
         res.redirect("/dashboard");
       }
 
@@ -260,7 +257,6 @@ app.get("/",function(req,res){
     else{
 
       Event.find().then(function(e){
-        //console.log(e);
         currEvents2=e;
       })
       res.redirect("/admin");
@@ -320,7 +316,6 @@ app.get("/",function(req,res){
   app.get("/events/:eventName/addspeaker",function(req,res){
     Event.findOne({name:req.params.eventName}).then(function(foundEvent){
 
-      console.log(foundEvent);
       res.render("addspeaker",{currEvent1:foundEvent});
 
       
@@ -335,7 +330,6 @@ app.get("/",function(req,res){
     const eventName=req.params.eventName;
     currentEvent=eventName;
     Event.findOne({name:eventName}).then(function(currentEvent){
-      //console.log("I am at event "+currentEvent.name);
       res.render("events",{event1:currentEvent});
     })
   })
@@ -346,8 +340,17 @@ app.get("/",function(req,res){
     const eventName=req.params.eventName;
     currentEvent=eventName;
     Event.findOne({name:eventName}).then(function(currentEvent){
-      //console.log("I am at event "+currentEvent.name);
-      res.render("viewEvent",{event1:currentEvent});
+      res.render("viewEvent",{event1:currentEvent,currUsers1:currUsers});
+    })
+  })
+
+
+  app.get("/view-event/:eventName/RSVP",function(req,res){
+
+    const eventName=req.params.eventName;
+    currentEvent=eventName;
+    Event.findOne({name:eventName}).then(function(currentEvent){
+      res.render("RSVP",{currUsers1:currUsers,event1:currentEvent});
     })
   })
 
@@ -355,7 +358,6 @@ app.get("/",function(req,res){
 
     const speakerName=req.params.speakerName;
     Speaker.findOne({speakername:speakerName}).then(function(currSpeaker){
-      console.log(currSpeaker);
       res.render("speaker",{speaker1:currSpeaker});
     })
   })
@@ -423,7 +425,6 @@ app.get("/",function(req,res){
   app.get("/editevent/:eventName",function(req,res){
     const eventName=req.params.eventName;
     Event.findOne({name:eventName}).then(function(currentEvent){
-      console.log(currentEvent);
       res.render("editevent",{eventToEdit:currentEvent});
     })
   })
@@ -471,6 +472,41 @@ app.get("/",function(req,res){
       res.redirect("/admin");
 
     })
+  })
+
+  app.post("/view-event/:eventName/RSVP",function(req,res){
+
+    let currEvent=req.params.eventName;
+
+   const attendeeName=req.body.attendeeName;
+   const attendeeUserName=req.body.attendeeUserName;
+   const attendeeEmail=req.body.attendeeEmail;
+   const attendeeYear=req.body.attendeeYear;
+   const attendeeDeptStudent=req.body.attendeeDeptStudent;
+   const attendeeDeptFaculty=req.body.attendeeDeptFaculty;
+
+   const newAttendee={
+    attendeeName:attendeeName,
+    attendeeUserName:attendeeUserName,
+    attendeeEmail:attendeeEmail,
+    attendeeDeptStudent:attendeeDeptStudent,
+    attendeeDeptFaculty:attendeeDeptFaculty,
+    attendeeYear:attendeeYear
+   };
+   //console.log(newAttendee);
+
+   Event.findOne({name:currEvent}).then(function(foundEvent){
+
+     foundEvent.attendeesList.push(newAttendee);
+     foundEvent.maxAttendees-=1;
+     foundEvent.save();
+     //console.log("List of attendees so far:"+foundEvent.attendeesList); 
+     res.redirect("/view-event/"+currEvent);
+   })
+
+  
+
+
   })
 
 app.listen(3000, function() {
