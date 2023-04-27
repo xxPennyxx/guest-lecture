@@ -10,10 +10,15 @@
   
 </header>
 
+<!--Upcoming events-->
+
 <div style="padding:128px 16px">
   <span class="w3-jumbo w3-hide-small">UPCOMING EVENTS</span><br><br>
 
-<% eventList.forEach(function(i){ %>
+  <%   upcomingEvents1=upcomingEvents1.sort((a,b)=>new Date(b.startdate)-new Date(a.startdate)) %>
+
+
+<% upcomingEvents1.forEach(function(i){ %>
 
 
 <!--Upcoming Events section -->
@@ -51,46 +56,46 @@
 
 
 <!-- Past Events Section: ICYMI -->
-<div class="w3-container" style="padding:128px 16px" id="team">
-  <h3 class="w3-jumbo w3-center">PAST EVENTS</h3>
-  <p class="w3-center w3-xlarge">Click to know more on details and insights on past events</p>
-  <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
-    <div class="w3-col l4 m6 w3-margin-bottom">
-      <div class="w3-card">
-        <img src="https://pbs.twimg.com/profile_images/446356636710363136/OYIaJ1KK_400x400.png" alt="John" style="width:100%">
-        <div class="w3-container"><br>
-          <span class="w3-xxlarge">Importance of IoT</span>
-          <p class="w3-opacity w3-xlarge">29th January 2023</p>
-          <p class="w3-large">This workshop focuses on Suspendisse sodales pellentesque elementum.</p>
-          <p><button class="w3-button w3-light-grey w3-block w3-large">View details</button></p>
-        </div>
-      </div>
+
+<div style="padding:128px 16px">
+  <span class="w3-jumbo w3-hide-small">PAST EVENTS</span><br><br>
+
+  <%   pastEvents1=pastEvents1.sort((a,b)=>new Date(b.startdate)-new Date(a.startdate)) %>
+
+
+<% pastEvents1.forEach(function(i){ %>
+
+
+<div class="w3-container w3-light-grey" style="padding:48px 16px">
+  <div class="w3-row-padding">
+    <div class="w3-col m6">
+      <span class="w3-xxlarge"><%= i.name %></span><br><br>
+      <span class="w3-large"><%= i.desc %></span><br><br>
+
+      <% if(i.days!=1) {%>
+      <span class="w3-large">Date: <%= new Date(i.startdate).toDateString() %> - <%= new Date(i.enddate).toDateString() %> </span><br>
+      <% }else{ %>
+      <span class="w3-large">Date: <%= new Date(i.startdate).toDateString() %> </span><br>
+      <% }%>
+
+      
+      <span class="w3-large">Time:  <%= i.starttime%> -  <%= i.endtime %></span><br>
+      <span class="w3-large"> Mode:  <%= i.mode %></span>
+      <p><a href="/events/<%= i.name %>" class="w3-button w3-black"> View Details</a></p>
+      <p><a href="/editevent/<%= i.name %>" class="w3-button w3-black"> Edit Event</a></p>
+      <p><a href="/delete/<%= i.name %>" class="w3-button w3-black"> Delete Event</a></p>
+
+
     </div>
-    <div class="w3-col l4 m6 w3-margin-bottom">
-      <div class="w3-card">
-        <img src="https://pbs.twimg.com/profile_images/446356636710363136/OYIaJ1KK_400x400.png" alt="Jane" style="width:100%">
-        <div class="w3-container"><br>
-          <span class="w3-xxlarge">Anokha 2023 Curtain-raiser</span>
-          <p class="w3-opacity w3-xlarge">14th February 2023</p>
-          <p class="w3-large">This workshop focuses on Suspendisse sodales pellentesque elementum.</p>
-          <p><button class="w3-button w3-light-grey w3-block w3-large">View details</button></p>
-        </div>
-      </div>
+    <div class="w3-col m6">
+      <img class="w3-image w3-round-large" src="<%= i.imgURL %>" alt="Buildings" width="300" height="300">
     </div>
-    <div class="w3-col l4 m6 w3-margin-bottom">
-      <div class="w3-card">
-        <img src="https://pbs.twimg.com/profile_images/446356636710363136/OYIaJ1KK_400x400.png" alt="Mike" style="width:100%">
-        <div class="w3-container"><br>
-          <span class="w3-xxlarge">Career profiling</span>
-          <p class="w3-opacity w3-xlarge">15th February 2023</p>
-          <p class="w3-large">This workshop focuses on Suspendisse sodales pellentesque elementum.</p>
-          <p><button class="w3-button w3-light-grey w3-block w3-large">View details</button></p>
-        </div>
-      </div>
-    </div>
-    
   </div>
 </div>
+<hr>
+
+<% }) %>
+
 
 <!-- Feedback and event registration form -->
 <div id="feedback" class="w3-container w3-row w3-center w3-dark-grey w3-padding-64">

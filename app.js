@@ -17,6 +17,9 @@ let currUsers=[];
 let currEvents2=[];
 let currSpeakers=[];
 
+let upcomingEvents=[];
+let pastEvents=[];
+
 
 
 const userSchema = {
@@ -273,18 +276,63 @@ app.get("/",function(req,res){
   })
 
   app.get("/dashboard",function(req,res){
+
+    let upcomingEvents=[];
+    let pastEvents=[];
     Event.find().then(function(currEvents2){
 
-      res.render("dashboard",{currUsers1:currUsers, eventList:currEvents2});
+      
+
+      currEvents2.forEach(function(event){
+
+        if(validateDate(event.startdate))
+        upcomingEvents.push(event);
+        else
+        pastEvents.push(event);
+      })
+      console.log("Upcoming events:")
+      console.log(upcomingEvents);
+      console.log("Past events:")
+
+      console.log(pastEvents);
+
+      //res.render("dashboard",{currUsers1:currUsers, eventList:currEvents2});
+      res.render("dashboard",{currUsers1:currUsers, upcomingEvents1:upcomingEvents, pastEvents1:pastEvents});
+
 
     })
   })
 
   app.get("/admin",function(req,res){
+
+    let upcomingEvents=[];
+    let pastEvents=[];
+
+
     Event.find().then(function(e){
-      res.render("admin",{eventList:e});
+
+      e.forEach(function(event){
+
+        if(validateDate(event.startdate))
+        upcomingEvents.push(event);
+        else
+        pastEvents.push(event);
+      })
+      console.log("Upcoming events:")
+      console.log(upcomingEvents);
+      console.log("Past events:")
+
+      console.log(pastEvents);
+
+
+
+      //res.render("admin",{eventList:e});
+      res.render("admin",{upcomingEvents1:upcomingEvents, pastEvents1:pastEvents});
+
 
     })
+
+    
   })
 
 
