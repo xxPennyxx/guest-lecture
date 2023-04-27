@@ -144,6 +144,14 @@ app.get("/",function(req,res){
     return false;
   }
 
+  function validateDate(date){
+    let today=new Date();
+    if (new Date(date)>today)
+    return true;
+    else
+    return false;
+  }
+
   function assignRoles(email){
     if(validateEmailId(email)){
     if(email.endsWith("cb.amrita.edu"))
@@ -288,6 +296,8 @@ app.get("/",function(req,res){
  
   
   app.post("/addevent",function(req,res){
+
+    if((validateDate(req.body.startdate)) && validateDate(req.body.enddate) && new Date(req.body.enddate)>new Date(req.body.startdate) ){
     const newEvent=new Event({
       name:req.body.name,
       desc:req.body.desc,
@@ -301,12 +311,17 @@ app.get("/",function(req,res){
       mode:req.body.mode,
       maxAttendees:req.body.maxAttendees,
       link:req.body.link,
-      venue:req.body.venue
+      venue:req.body.venue,
+      days:new Date(req.body.enddate)-new Date(req.body.startdate)+1
     })
 
     newEvent.save();
     currEvents.push(newEvent);
     res.redirect("/events/"+req.body.name);
+  }
+
+  else
+  res.redirect("/addevent")
   })
 
 
@@ -365,6 +380,20 @@ app.get("/",function(req,res){
 
   app.post("/events/:eventName/addspeaker",function(req,res){
 
+
+
+    let currSpeakers2=[];
+
+    let eventName=req.params.eventName;
+    Event.findOne({name:eventName}).then(function(foundEvent){
+      currSpeakers2=foundEvent.speakers;
+
+    })
+    if(currSpeakers2.length==0)
+    currSpeakers2=[];
+    console.log(currSpeakers2);
+
+
     let newSpeaker=new Speaker({
 
       speakername:req.body.speakername,
@@ -379,11 +408,22 @@ app.get("/",function(req,res){
 
     })
     newSpeaker.save();
-    currSpeakers.push(newSpeaker);
+    currSpeakers2.push(newSpeaker);
     
-    Event.updateOne({name:req.params.eventName},{speakers:currSpeakers}).exec();
+    Event.updateOne({name:req.params.eventName},{speakers:currSpeakers2}).exec();
     res.redirect("/events/"+req.params.eventName);
     
+  })
+
+  app.post("/events/:eventName/removespeaker",function(req,res){
+      console.log(req.body.speakerToRemove);
+      let eventName=req.params.eventName;
+      //try updateOne and see
+      Event.updateOne({name:eventName}, {$pull: {speakers: {speakername: req.body.speakerToRemove}}}).exec();
+      res.redirect("/events/"+eventName);
+
+
+
   })
 
   app.get("/speakers/:speakerName/edit",function(req,res){

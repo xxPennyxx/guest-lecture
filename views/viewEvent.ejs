@@ -153,15 +153,28 @@ margin-bottom:7.5px;
 
 
 
-      <%  if( (event1.maxAttendees<=0) || (listOfAttendeeUsernames.includes(currUsers1[currUsers1.length-1].username ) )) { %>
+      <%  if((event1.mode=="Online" ||event1.mode=="Hybrid") &&(listOfAttendeeUsernames.includes(currUsers1[currUsers1.length-1].username ) )) { %>
 
-        <p><a href="" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">You have already RSVP'd to this event</a></p>
+        <p><a href="<%=event1.link %>" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Join virtual event</a></p>
 
 
+
+        <%  } else if(event1.mode=="Offline" &&(listOfAttendeeUsernames.includes(currUsers1[currUsers1.length-1].username ) )) { %>
+
+          <p><a href="" style="pointer-events: none" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">You have already RSVP'd to this event</a></p>
+  
+  
 
       <% } else if(event1.maxAttendees<=0)  { %>
 
-        <p><a href="" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Seats are full!</a></p>
+        <p><a href="" style="pointer-events: none" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Seats are full!</a></p>
+
+        <% } else if((new Date()> new Date(event1.startdate+' '+event1.starttime))|| (new Date()> new Date(event1.enddate+' '+event1.endtime)))  { %>
+
+          <p><a href="" style="pointer-events: none" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">The event has passed!</a></p>
+
+
+
 
         <% } else { %>
 
@@ -237,7 +250,7 @@ margin-bottom:7.5px;
 <!-- Footer -->
 <footer class="w3-center w3-black w3-padding-64">
   <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a><br><br>
-  <a href="/admin" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>Back to dashboard</a>
+  <a href="/dashboard" class="w3-button w3-light-grey"><i class="fa fa-arrow-left w3-margin-right"></i>Back to dashboard</a>
 
   <div class="w3-xlarge w3-section">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>

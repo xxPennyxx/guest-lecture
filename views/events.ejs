@@ -174,7 +174,10 @@ margin-bottom:7.5px;
           <p class="w3-xlarge"><%=s.speakername%></p>
           <p><%=s.designation%>, <%=s.company%></p><br>
           <a class="w3-button w3-black w3-padding-large" href="/speakers/<%=s.speakername%>">View Profile</a><br><br>
-          <a class="w3-button w3-black w3-padding-large" href="/speakers/<%=s.speakername%>/edit">Edit Profile</a>
+          <a class="w3-button w3-black w3-padding-large" href="/speakers/<%=s.speakername%>/edit">Edit Profile</a><br><br>
+          <form action="/events/<%=event1.name%>/removespeaker" method="POST">
+            <button type="submit" name="speakerToRemove" value="<%=s.speakername%>" class="w3-button w3-red w3-padding-large">Remove from list</a>
+          </form>
 
         </div> <br><br><br>
 

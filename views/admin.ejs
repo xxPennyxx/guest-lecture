@@ -23,11 +23,12 @@
   <div class="w3-row-padding">
     <div class="w3-col m6">
       <span class="w3-xxlarge"><%= i.name %></span><br><br>
+      <span class="w3-large"><%= i.desc %></span><br><br>
 
       <% if(i.days!=1) {%>
       <span class="w3-large">Date: <%= new Date(i.startdate).toDateString() %> - <%= new Date(i.enddate).toDateString() %> </span><br>
       <% }else{ %>
-      <span class="w3-large">Date: <%= i.startdate %> </span><br>
+      <span class="w3-large">Date: <%= new Date(i.startdate).toDateString() %> </span><br>
       <% }%>
 
       
