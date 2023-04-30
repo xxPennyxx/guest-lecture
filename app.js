@@ -7,20 +7,13 @@ let app=express();
 mongoose.set("strictQuery", false);
 mongoose.connect('mongodb://127.0.0.1:27017/guestDB');
 
-app.set('view engine','ejs')
+app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"))
 
 
 let currEvents=[];
 let currUsers=[];
-let currEvents2=[];
-let currSpeakers=[];
-
-let upcomingEvents=[];
-let pastEvents=[];
-
-
 
 const userSchema = {
   username:{
@@ -67,7 +60,7 @@ const speakerSchema={
    designation:String,
    website:String,
    speakerEmail:String
-}
+};
 
 const eventSchema={
 
@@ -117,7 +110,7 @@ const eventSchema={
    numSpeakers:Number,
    speakers:[speakerSchema],
    attendeesList:[Object]
-}
+};
 const User = mongoose.model("User", userSchema);
 const Event = mongoose.model("Event", eventSchema);
 const Speaker = mongoose.model("Speaker", speakerSchema);
@@ -201,7 +194,7 @@ app.get("/",function(req,res){
 
       });
     }  
-    else res.redirect("/signup")   
+    else res.redirect("/signup");   
     
   })
 
@@ -235,7 +228,7 @@ app.get("/",function(req,res){
         } }) }
 
     else{
-      res.redirect("/signup1")
+      res.redirect("/signup1");
     }  
 
   })
@@ -280,9 +273,6 @@ app.get("/",function(req,res){
     let upcomingEvents=[];
     let pastEvents=[];
     Event.find().then(function(currEvents2){
-
-      
-
       currEvents2.forEach(function(event){
 
         if(validateDate(event.startdate))
@@ -290,16 +280,8 @@ app.get("/",function(req,res){
         else
         pastEvents.push(event);
       })
-      console.log("Upcoming events:")
-      console.log(upcomingEvents);
-      console.log("Past events:")
-
-      console.log(pastEvents);
-
       //res.render("dashboard",{currUsers1:currUsers, eventList:currEvents2});
       res.render("dashboard",{currUsers1:currUsers, upcomingEvents1:upcomingEvents, pastEvents1:pastEvents});
-
-
     })
   })
 
@@ -307,44 +289,25 @@ app.get("/",function(req,res){
 
     let upcomingEvents=[];
     let pastEvents=[];
-
-
     Event.find().then(function(e){
-
       e.forEach(function(event){
-
         if(validateDate(event.startdate))
         upcomingEvents.push(event);
         else
         pastEvents.push(event);
       })
-      console.log("Upcoming events:")
-      console.log(upcomingEvents);
-      console.log("Past events:")
-
-      console.log(pastEvents);
-
-
-
       //res.render("admin",{eventList:e});
       res.render("admin",{upcomingEvents1:upcomingEvents, pastEvents1:pastEvents});
-
-
     })
 
-    
   })
 
 
   app.get("/addevent",function(req,res){
     res.render("addevent");
   })
- 
-
- 
   
   app.post("/addevent",function(req,res){
-
     if((validateDate(req.body.startdate)) && validateDate(req.body.enddate) && new Date(req.body.enddate)>new Date(req.body.startdate) ){
     const newEvent=new Event({
       name:req.body.name,
@@ -361,7 +324,7 @@ app.get("/",function(req,res){
       link:req.body.link,
       venue:req.body.venue,
       days:new Date(req.body.enddate)-new Date(req.body.startdate)+1
-    })
+    });
 
     newEvent.save();
     currEvents.push(newEvent);
@@ -369,34 +332,93 @@ app.get("/",function(req,res){
   }
 
   else
-  res.redirect("/addevent")
+  res.redirect("/addevent");
   })
-
-
-
-
-  
-  app.get("/events/:eventName/addspeaker",function(req,res){
-    Event.findOne({name:req.params.eventName}).then(function(foundEvent){
-
-      res.render("addspeaker",{currEvent1:foundEvent});
-
-      
-    })
-  })
-
- 
-
 
   app.get("/events/:eventName",function(req,res){
 
     const eventName=req.params.eventName;
     currentEvent=eventName;
+
+    let speakersList=[];
+    Speaker.find().then(function(s){
+      //console.log(s);
+      speakersList=s;
+      //console.log(speakersList);
+    })
+
+
     Event.findOne({name:eventName}).then(function(currentEvent){
-      res.render("events",{event1:currentEvent});
+      res.render("events",{event1:currentEvent,speakersList1:speakersList});
     })
   })
 
+
+
+  app.get("/events/:eventName/addspeaker",function(req,res){
+    Event.findOne({name:req.params.eventName}).then(function(foundEvent){
+
+      res.render("addspeaker",{currEvent1:foundEvent})
+      
+    })
+  })
+
+  app.post("/events/:eventName/addspeaker",function(req,res){
+
+    let currSpeakers2=[];
+
+    let eventName=req.params.eventName;
+    Event.findOne({name:eventName}).then(function(foundEvent){
+      currSpeakers2=foundEvent.speakers;
+
+    })
+    if(currSpeakers2.length==0)
+    currSpeakers2=[];
+    //console.log(currSpeakers2);
+
+    let newSpeaker=new Speaker({
+
+      speakername:req.body.speakername,
+      twitter:req.body.twitter,
+      linkedin:req.body.linkedin,
+      imgURL:req.body.imgURL,
+      company:req.body.company,
+      designation:req.body.designation,
+      website:req.body.website,
+      bio:req.body.bio,
+      speakerEmail:req.body.speakerEmail
+
+    });
+    newSpeaker.save();
+    currSpeakers2.push(newSpeaker);
+    
+    Event.updateOne({name:req.params.eventName},{speakers:currSpeakers2}).exec();
+    res.redirect("/events/"+req.params.eventName);
+    
+  })
+
+  app.post("/events/:eventName/removespeaker",function(req,res){
+      //console.log(req.body.speakerToRemove);
+      let eventName=req.params.eventName;
+      //try updateOne and see
+      Event.updateOne({name:eventName}, {$pull: {speakers: {speakername: req.body.speakerToRemove}}}).exec();
+      res.redirect("/events/"+eventName);
+  })
+
+  app.post("/events/:eventName/addexistingspeaker",function(req,res){
+    let eventName=req.params.eventName;
+    let speakerToAdd=req.body.existingspeaker;
+    
+    Speaker.findOne({speakername:speakerToAdd}).then(function(foundSpeaker){
+      //console.log(foundSpeaker);
+      Event.findOne({name:eventName}).then(function(foundEvent){
+        foundEvent.speakers.push(foundSpeaker);
+        foundEvent.save();
+    })
+
+  })
+  res.redirect("/events/"+eventName);
+})
 
   app.get("/view-event/:eventName",function(req,res){
 
@@ -426,54 +448,6 @@ app.get("/",function(req,res){
   })
 
 
-  app.post("/events/:eventName/addspeaker",function(req,res){
-
-
-
-    let currSpeakers2=[];
-
-    let eventName=req.params.eventName;
-    Event.findOne({name:eventName}).then(function(foundEvent){
-      currSpeakers2=foundEvent.speakers;
-
-    })
-    if(currSpeakers2.length==0)
-    currSpeakers2=[];
-    console.log(currSpeakers2);
-
-
-    let newSpeaker=new Speaker({
-
-      speakername:req.body.speakername,
-      twitter:req.body.twitter,
-      linkedin:req.body.linkedin,
-      imgURL:req.body.imgURL,
-      company:req.body.company,
-      designation:req.body.designation,
-      website:req.body.website,
-      bio:req.body.bio,
-      speakerEmail:req.body.speakerEmail
-
-    })
-    newSpeaker.save();
-    currSpeakers2.push(newSpeaker);
-    
-    Event.updateOne({name:req.params.eventName},{speakers:currSpeakers2}).exec();
-    res.redirect("/events/"+req.params.eventName);
-    
-  })
-
-  app.post("/events/:eventName/removespeaker",function(req,res){
-      console.log(req.body.speakerToRemove);
-      let eventName=req.params.eventName;
-      //try updateOne and see
-      Event.updateOne({name:eventName}, {$pull: {speakers: {speakername: req.body.speakerToRemove}}}).exec();
-      res.redirect("/events/"+eventName);
-
-
-
-  })
-
   app.get("/speakers/:speakerName/edit",function(req,res){
 
     let speakerToEdit=req.params.speakerName;
@@ -487,7 +461,6 @@ app.get("/",function(req,res){
   app.post("/speakers/:speakerName/edit",function(req,res){
 
     let speakerToEdit=req.params.speakerName;
-
     let newDetails={
 
       speakername:req.body.speakername,
@@ -501,13 +474,10 @@ app.get("/",function(req,res){
       speakerEmail:req.body.speakerEmail
     }
 
-
-    
     Speaker.updateOne({speakername:speakerToEdit},newDetails).exec();
     res.redirect("/events/"+currentEvent);
     
   })
-
 
 
   app.get("/editevent/:eventName",function(req,res){
@@ -539,8 +509,6 @@ app.get("/",function(req,res){
   })
 
 
-
-
   app.get("/delete/:eventName",function(req,res){
     const eventName=req.params.eventName;
     Event.findOne({name:eventName}).then(function(currentEvent){
@@ -553,7 +521,6 @@ app.get("/",function(req,res){
     const eventName=req.params.eventName;
     Event.deleteOne({name:eventName}).exec();
 
-    
     Event.find().then(function(foundEvents){
 
       currEvents=foundEvents;
@@ -591,9 +558,6 @@ app.get("/",function(req,res){
      //console.log("List of attendees so far:"+foundEvent.attendeesList); 
      res.redirect("/view-event/"+currEvent);
    })
-
-  
-
 
   })
 
