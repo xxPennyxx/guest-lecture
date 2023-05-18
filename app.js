@@ -308,7 +308,7 @@ app.get("/",function(req,res){
   })
   
   app.post("/addevent",function(req,res){
-    if((validateDate(req.body.startdate)) && validateDate(req.body.enddate) && new Date(req.body.enddate)>new Date(req.body.startdate) ){
+    if((validateDate(req.body.startdate)) && validateDate(req.body.enddate) && new Date(req.body.enddate)>=new Date(req.body.startdate) ){
     const newEvent=new Event({
       name:req.body.name,
       desc:req.body.desc,

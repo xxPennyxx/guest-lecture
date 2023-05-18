@@ -37,7 +37,7 @@ body {
   border-top-right-radius: 0;
 }
 .meh{
-  background-color:#B2B2B2;
+  background-image:url('2.jpg');
 }
 .standout{
   font-size:100px;
@@ -48,7 +48,8 @@ body {
   color:black
 }
 .instructions{
-    padding: 2rem;
+    width:50%;
+    text-align: center;
 }
 select {
     width: 100%;
@@ -62,3 +63,7 @@ select {
   a:link{
     color: black;
   }
+  .amrita{
+    text-align: center;
+  }
+

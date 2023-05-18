@@ -1,15 +1,16 @@
 <%- include ("partials/signupLoginHeader") -%>
-
+<!--    <img src="amrita.png">
+-->
     
-    <main class="form-signin w-100 m-auto">
-        <form action="/signup" method="post" name="signupform" onsubmit="setInvalid()">
-          <h1 class=" standout h3 mb-3 fw-normal">Sign Up</h1>
+    <main class="red form-signin w-100 m-auto">
+        <form  action="/signup" method="post" name="signupform" onsubmit="setInvalid()">
+          <h2 class=" standout h4 mb-3 fw-normal">Sign Up</h2>
           
        
       
           
-          <div class="form-floating">
-            <input type="text" name="username" id="username" class="form-control top"  placeholder="Username" required>
+          <div class="form-floating top">
+            <input type="text" name="username" id="username" class="form-control forms top"  placeholder="Username" required>
             <label for="username">Username</label>
           </div>
           <div class="form-floating">
@@ -37,11 +38,15 @@
         </form><br>
         <p>Already an existing user? <a href="/login">Login</a></p>
       </main>
-      <div class="instructions">
+      <center>
+      <div class="blue instructions">
         <p>For students: Username must be your roll number (eg. CB.EN.U4CSE20XXX)<br>
         For faculty: Username must be of the format initials_name (eg. p_mukesh)<br>
         Password length must be minimum 8 characters and must feature at least one letter of both cases, a numeric and special character.</p>
-      </div>
+      </div></center>
+    
+    
+    </div>
       
       <%- include ("partials/signupLoginFooter") -%>
 
