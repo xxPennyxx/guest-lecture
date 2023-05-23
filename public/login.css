@@ -37,7 +37,9 @@ body {
   border-top-right-radius: 0;
 }
 .meh{
-  background-image:url('2.jpg');
+  background-image:url('./2.jpg');
+  background-size: 100%;
+ 
 }
 .standout{
   font-size:100px;
@@ -50,6 +52,10 @@ body {
 .instructions{
     width:50%;
     text-align: center;
+    padding-left:2rem;
+    padding-right:2rem;
+    padding-top:1rem;
+    padding-bottom: 0.025rem;
 }
 select {
     width: 100%;
