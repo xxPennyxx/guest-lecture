@@ -16,6 +16,10 @@ let currEvents=[];
 let currUsers=[];
 
 const userSchema = {
+  name:{
+
+    type: String
+  },
   username:{
    type: String,
   required:[true, ""],
@@ -109,11 +113,23 @@ const eventSchema={
    maxAttendees:Number,
    numSpeakers:Number,
    speakers:[speakerSchema],
-   attendeesList:[Object]
+   attendeesList:[Object],
+   recording:String
 };
+
+const feedbackSchema={
+
+  eventName:String,
+  experience:Number,
+  content:Number,
+  expectations:Number,
+  engaging:Number,
+  improvement:String
+}
 const User = mongoose.model("User", userSchema);
 const Event = mongoose.model("Event", eventSchema);
 const Speaker = mongoose.model("Speaker", speakerSchema);
+const Feedback=mongoose.model("Feedback",feedbackSchema);
 
 
 app.get("/",function(req,res){
@@ -550,6 +566,8 @@ app.get("/",function(req,res){
    };
    //console.log(newAttendee);
 
+   User.updateOne({username:attendeeUserName},{name:attendeeName}).exec();
+
    Event.findOne({name:currEvent}).then(function(foundEvent){
 
      foundEvent.attendeesList.push(newAttendee);
@@ -559,6 +577,45 @@ app.get("/",function(req,res){
      res.redirect("/view-event/"+currEvent);
    })
 
+  })
+
+
+  app.get("/view-event/:eventName/feedback",function(req,res){
+    Event.findOne({name:req.params.eventName}).then(function(foundEvent){
+
+      res.render("feedback",{currEvent1:foundEvent,currUsers1:currUsers})
+      
+    })
+  })
+
+
+
+  app.post("/view-event/:eventName/feedback",function(req,res){
+    const newFeedback=new Feedback({
+      eventName:req.body.eventName,
+      experience:req.body.experience,
+      content:req.body.content,
+      expectations:req.body.expectations,
+      engaging:req.body.engaging,
+      improvement:req.body.improvement
+
+    });
+    newFeedback.save();
+    res.redirect("/thankyou")
+
+  })
+
+  app.get("/thankyou",function(req,res){
+
+    res.render("thankyou")
+  })
+
+  app.post("/addrecording",function(req,res){
+    const video=req.body.video;
+    const eventName=req.body.recording;
+    Event.updateOne({name:eventName},{recording:video}).exec();
+      res.redirect("/events/"+eventName);
+  
   })
 
 app.listen(3000, function() {

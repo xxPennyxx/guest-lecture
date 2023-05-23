@@ -1,16 +1,9 @@
 <%- include ("partials/dashboardHeader") -%>
 <div class="w3-container w3-light-grey" style="padding:128px 32px; width:75%; margin:auto;" id="generalinfo">
-    <h3 class="w3-xxxlarge">Attendee Details</h3>
+    <h3 class="w3-xxxlarge">Feedback</h3>
     
-      <form action="/view-event/<%=event1.name%>/RSVP" method="POST">
-
-
-        <% if(currUsers1[currUsers1.length-1].name){ %>
-        <p><label class="w3-xlarge" for="attendeeName">Name of Attendee (as mentioned in university records)</label></p><input class="w3-input w3-border" id="attendeeName" value="<%=currUsers1[currUsers1.length-1].name%>" type="text" required name="attendeeName">
-
-        <% }else{ %>
+      <form action="/view-event/<%=currEvent1.name%>/feedback" method="POST">
         <p><label class="w3-xlarge" for="attendeeName">Name of Attendee (as mentioned in university records)</label></p><input class="w3-input w3-border" id="attendeeName" type="text" required name="attendeeName">
-          <% }%>
         <p><label class="w3-xlarge" for="attendeeUserName">Your Username (Roll no. or Faculty Username )</label></p><input class="w3-input w3-border" id="attendeeUserName" value="<%=currUsers1[currUsers1.length-1].username%>" type="text" required name="attendeeUserName">
         <p><label class="w3-xlarge" for="attendeeEmail">Your University Email ID</label></p><input class="w3-input w3-border" id="attendeeEmail" type="text" value="<%=currUsers1[currUsers1.length-1].email%>" required name="attendeeEmail">
         
@@ -86,14 +79,56 @@
           </div>
 
 
+          <p class="w3-xlarge">How would you rate your overall experience at the event?</p>
+          <div class="form-floating">
+            <select name="experience">
+              <option value="1"> 1</option>
+              <option value="2"> 2</option>
+              <option value="3"> 3</option>
+              <option value="4"> 4</option>
+              <option value="5"> 5</option>
+            </select>
+          </div>
 
+          <p class="w3-xlarge">How useful was the content provided at the event?</p>
+          <div class="form-floating">
+            <select name="content">
+              <option value="1"> 1</option>
+              <option value="2"> 2</option>
+              <option value="3"> 3</option>
+              <option value="4"> 4</option>
+              <option value="5"> 5</option>
+            </select>
+          </div>
 
+          <p class="w3-xlarge">Did the event meet your expectations?</p>
+          <div class="form-floating">
+            <select name="expectations">
+              <option value="1"> 1</option>
+              <option value="2"> 2</option>
+              <option value="3"> 3</option>
+              <option value="4"> 4</option>
+              <option value="5"> 5</option>
+            </select>
+          </div>
 
+          <p class="w3-xlarge">Did you find the event quite engaging and interactive?</p>
+          <div class="form-floating">
+            <select name="engaging">
+              <option value="1"> 1</option>
+              <option value="2"> 2</option>
+              <option value="3"> 3</option>
+              <option value="4"> 4</option>
+              <option value="5"> 5</option>
+            </select>
+          </div>
+
+          <p><label class="w3-xlarge" for="improvement">Do you have any suggestions to improve our future events?</label></p><textarea class="w3-input w3-border" id="improvement" rows=10  name="improvement"></textarea>
 
 
         <p>
-          <button class="w3-button w3-black" name="" type="submit">
-            <i class="fa fa-check"></i> SAVE AND CONTINUE
+          <button class="w3-button w3-black" name="eventName" value="<%=currEvent1.name%>" type="submit">
+            <i class="fa fa-check"></i> SUBMIT
           </button>
         </p>
 

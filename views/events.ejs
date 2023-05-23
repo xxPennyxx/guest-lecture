@@ -68,6 +68,12 @@ margin-right:7.5px;
 margin-top:7.5px;
 margin-bottom:7.5px;
 } 
+
+input{
+  width: 70%;
+  height: 3rem;
+  font-size: 1.125rem;
+}
 </style>
 </head>
 <body>
@@ -75,7 +81,7 @@ margin-bottom:7.5px;
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-card" id="myNavbar">
-    <a style="text-decoration: none;" href="/dashboard"><img src="amrita.png" height="9%" width="9%"><span style="text-decoration: none; font-size: 1.35rem; font-weight: 500;"> Guest Lecture Portal</span></a>
+    <a style="text-decoration: none;" href="/dashboard"><span style="text-decoration: none; font-size: 1.35rem; font-weight: 500;"> Guest Lecture Portal</span></a>
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
       <a href="" class="w3-bar-item w3-button">Welcome, <b>Admin</b></a>
@@ -221,6 +227,46 @@ margin-bottom:7.5px;
 
 
 <!--Don't give them the meeting link unless they've RSVP'd-->
+
+<% if((new Date()> new Date(event1.startdate+' '+event1.starttime))|| (new Date()> new Date(event1.enddate+' '+event1.endtime)))  { %>
+
+   
+
+  <!-- Recording-->
+
+  <div class="w3-container centered" style="padding:16px 16px" id="team">
+    <h1 class="w3-xxxlarge w3-center">Add recording</h1><br>
+    <p class="w3-xlarge">Got a video to share? Add a link to a video available in the Net to share with your attendees.</p>
+
+
+    <form action="/addrecording" method="post">
+
+      <input type="text" name="video" id="video" placeholder="https://youtu.be/dQw4w9WgXcQ">
+
+
+
+
+  
+  <div class="w3-row-padding w3-center centered" style="margin-top:64px">
+    <button class="w3-button w3-black w3-padding-large" type="submit" value="<%=event1.name %>" name="recording" >Add Recording</button>
+
+    </div>    </form>
+  </div></div>
+  </div><br><br>
+
+    
+<!--Feedback--><div><div>
+<div class="w3-container w3-row w3-center centered w3-dark-grey w3-padding-64">
+<h1 class="w3-xxxlarge w3-center">Got any feedback?</h1><br>
+<p class="w3-xlarge">We would love to hear from you on this event! Fill the form to let us know your experiences, so we keep improving and getting better!</p>
+
+<a class="w3-button w3-black w3-padding-large" href="/view-event/<%=event1.name %>/feedback">Fill feedback form</a>
+
+<br><br>
+
+</div>
+
+<% } %>
 
 
 
