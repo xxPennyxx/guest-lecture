@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title> Confirm event deletion</title>
+        <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+
+body, html {
+  height: 100%;
+  line-height: 1.8;
+}
+
+/* Full height image header */
+.bgimg-1 {
+  background-position: center;
+  background-size: cover;
+  background-image: url("https://t4.ftcdn.net/jpg/04/95/28/65/360_F_495286577_rpsT2Shmr6g81hOhGXALhxWOfx1vOQBa.jpg");
+  min-height: 100%;
+}
+
+.w3-bar .w3-button {
+  padding: 16px;
+}
+</style>
+    </head>
+    <body>
+        <div class="w3-center w3-black w3-padding-64">
+            <h1 class="w3-jumbo">Are you sure you want to cancel your RSVP?</h1>
+            <h6 class="w3-xxlarge">You will not be receiving any updates related to the event.</h6>
+            <br>
+            <form action="/view-event/<%=event1.name%>/cancelRSVP" method="post">
+                <button type="submit" name="studentToCancel" value="<%=currUsers1[currUsers1.length-1].username%>" class="w3-button w3-red w3-padding-large"><span class="w3-large">Confirm cancel</span></button>
+
+            </form>
+
+            <a href="/dashboard" class="w3-button w3-dark-grey w3-padding-large"><span class="w3-large">Back to dashboard</span></a>
+        </div>
+        
+    </body>
+</html>

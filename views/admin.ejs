@@ -15,6 +15,12 @@
 <div style="padding:128px 16px">
   <span class="w3-jumbo w3-hide-small">UPCOMING EVENTS</span><br><br>
 
+  <% if (upcomingEvents1.length==0) { %>
+
+    <p class="w3-large"> There are currently no upcoming events. Please check back later.</p>
+
+    <% } %>
+
   <%   upcomingEvents1=upcomingEvents1.sort((a,b)=>new Date(b.startdate)-new Date(a.startdate)) %>
 
 
@@ -60,6 +66,12 @@
 <div style="padding:128px 16px">
   <span class="w3-jumbo w3-hide-small">PAST EVENTS</span><br><br>
 
+  <% if (pastEvents1.length==0) { %>
+
+    <p class="w3-large"> There are no events that have happened so far.</p>
+
+    <% } %>
+
   <%   pastEvents1=pastEvents1.sort((a,b)=>new Date(b.startdate)-new Date(a.startdate)) %>
 
 
@@ -97,23 +109,12 @@
 <% }) %>
 
 
-<!-- Feedback and event registration form -->
-<div id="feedback" class="w3-container w3-row w3-center w3-dark-grey w3-padding-64">
-    <div class="w3-xlarge w3-section">
-        <h1>Would you like your event to be featured here?</h1>
-        <h4>Fill the event registration form <u>here</u> with all the details! </h4>
-        <h4>Details regarding rules for event hosting and general disciplinary guidelines will be found in the above link.</h4>
-      </div>
-</div>
-
-
 
 
 
 <!-- Contact/footer -->
 <footer id="contact" class="w3-center w3-black w3-padding-64">
     <h1> CONTACT</h1>
-  <p class="w3-center w3-large">For feedback, queries and more, reach out to us on:</p>
   <div style="margin-top:48px">
     <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> Amrita School of Computing</p>
     <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone: +1234 5678 90</p>

@@ -11,12 +11,26 @@
 
         <!-- Add more tags-->
 
-
        <% var tags=["Machine Learning","Coding and Programming","Cyber Security","Research and Open Source","Culture and Heritage","Life Skills","Web and App Development","Internet of Things","Career Development and Entrepreneurship"]; %>
 
        <% tags.forEach(function(t){ %>
 
         <p><input type="checkbox" name="tags" id="<%= t %>" value="<%= t %>"> <label class="w3-large" for="<%= t %>"><%= t %></label></p>
+
+       <% })%>
+
+
+       <p><label class="w3-xlarge" for="desc1">Add Target Audience Departments</label></p>
+
+        <!-- Add more tags-->
+        <p><input type="checkbox" onClick="toggle(this)" /><label class="w3-large"> Select All</label></p>
+
+
+        <% var depts=["BTech AEE","BTech AIE","BTech ARE","BTech CCE","BTech CIE","BTech CSE","BTech CYS","BTech ECE","BTech EEE","BTech ELC","BTech MEE","MTech CSE","MTech Cyber Security","Int. MSc Physics","Int. MSc Chemistry","Int. MSc Data Science","Int. MSc Mathematics","BA English","MA English","BA Mass Communication"]; %>
+
+       <% depts.forEach(function(d){ %>
+
+        <p><input type="checkbox" name="depts" id="<%=d%>" value="<%=d%>"> <label class="w3-large" for="<%=d%>"><%=d%></label></p>
 
        <% })%>
 
@@ -73,5 +87,13 @@
   </div>
 
 </body>
+<script type="text/javascript">
+ function toggle(source) {
+  checkboxes = document.getElementsByName('depts');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
+}
+  </script>
 </html>
  

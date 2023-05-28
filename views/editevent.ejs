@@ -25,6 +25,28 @@
 
        <% } })%>
 
+
+
+       <p><label class="w3-xlarge" for="desc1">Add Target Audience Departments</label></p>
+
+        <!-- Add more depts-->
+        <p><input type="checkbox" onClick="toggle(this)" /><label class="w3-large"> Select All</label></p>
+
+
+        <% var depts=["BTech AEE","BTech AIE","BTech ARE","BTech CCE","BTech CIE","BTech CSE","BTech CYS","BTech ECE","BTech EEE","BTech ELC","BTech MEE","MTech CSE","MTech Cyber Security","Int. MSc Physics","Int. MSc Chemistry","Int. MSc Data Science","Int. MSc Mathematics","BA English","MA English","BA Mass Communication"]; %>
+
+       <% depts.forEach(function(d){ %>
+
+        <% if (eventToEdit.depts.includes(d)){ %>
+
+            <p><input type="checkbox" name="depts" id="<%= d %>" value="<%= d %>" checked> <label class="w3-large" for="<%= d %>"><%= d%></label></p>
+
+       <% } else { %>
+
+        <p><input type="checkbox" name="depts" id="<%= d %>" value="<%= d %>"> <label class="w3-large" for="<%= d %>"><%= d %></label></p>
+
+       <% } })%>
+
         
 
         <p><label class="w3-xlarge" for="imgURL">Add thumbnail image URL</label></p><input class="w3-input w3-border" id="imgURL" type="text"  name="imgURL" value="<%= eventToEdit.imgURL%>">
@@ -116,4 +138,13 @@ input[type=checkbox]{
 
  
  </body>
+
+ <script type="text/javascript">
+  function toggle(source) {
+   checkboxes = document.getElementsByName('depts');
+   for(var i=0, n=checkboxes.length;i<n;i++) {
+     checkboxes[i].checked = source.checked;
+   }
+ }
+   </script>
  </html>

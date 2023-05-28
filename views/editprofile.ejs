@@ -1,0 +1,188 @@
+<%- include ("partials/dashboardHeader") -%>
+<div class="w3-container w3-light-grey" style="padding:128px 32px; width:75%; margin:auto;" id="generalinfo">
+    <h3 class="w3-xxxlarge">Attendee Details</h3>
+    
+      <form action="/editprofile" method="POST">
+
+
+        <% if(currUsers1[currUsers1.length-1].name){ %>
+        <p><label class="w3-xlarge" for="name">Name of Student/Faculty (as mentioned in university records)</label></p><input class="w3-input w3-border" id="name" value="<%=currUsers1[currUsers1.length-1].name%>" type="text" required name="name">
+
+        <% }else{ %>
+        <p><label class="w3-xlarge" for="name">Name of Student/Faculty (as mentioned in university records)</label></p><input class="w3-input w3-border" id="name" type="text" required name="name">
+          <% }%>
+
+
+
+        <p><label class="w3-xlarge" for="username">Your Username (Roll no. or Faculty Username )</label></p><input class="w3-input w3-border" id="username" value="<%=currUsers1[currUsers1.length-1].username%>" type="text" required name="username">
+        <p><label class="w3-xlarge" for="email">Your University Email ID</label></p><input class="w3-input w3-border" id="email" type="text" value="<%=currUsers1[currUsers1.length-1].email%>" required name="email">
+        
+        <p class="w3-xlarge">Your year of study (if you're a student) <span class="w3-medium cta">Select 0 if you're a faculty member.</span></p>
+
+
+
+        <div class="form-floating">
+            <input type="number" style="width:20%; padding:2px" name="year" id="year" class="form-control bottom" value="<%=currUsers1[currUsers1.length-1].year%>" min="0" max="5" required>
+          </div>
+          <p class="w3-xlarge">Your department of study (if you're a student) <span class="w3-medium cta">Select "Faculty" if you're a faculty member.</span></p>
+
+          <% var depts=["BTech AEE","BTech AIE","BTech ARE","BTech CCE","BTech CIE","BTech CSE","BTech CYS","BTech ECE","BTech EEE","BTech ELC","BTech MEE","MTech CSE","MTech Cyber Security","Int. MSc Physics","Int. MSc Chemistry","Int. MSc Data Science","Int. MSc Mathematics","BA English","MA English","BA Mass Communication"]; %>
+
+          
+          <div class="form-floating">
+            <select name="dept">
+                
+              <option>Faculty</option>
+
+              <% depts.forEach(function(d){ %>
+
+                <% if(d===currUsers1[currUsers1.length-1].dept){ %>
+
+                    <option value="<%=d%>" selected><%=d%></option>
+
+                    <% } else { %>
+                
+              <option value="<%=d%>"><%=d%></option>
+              
+
+              <%}})%>
+
+              
+
+
+            </select>
+          </div>
+
+          <% var tags=["Machine Learning","Coding and Programming","Cyber Security","Research and Open Source","Culture and Heritage","Life Skills","Web and App Development","Internet of Things","Career Development and Entrepreneurship"]; %>
+
+    
+        
+
+          <p class="w3-xlarge">Topics of Interest<span class="w3-medium cta">  Select your preferred topics to filter events based on your interest.</span></p>
+          <p><input type="checkbox" onClick="toggle(this)" /><label class="w3-large"> Select All</label></p>
+
+          <% if(!(currUsers1[currUsers1.length-1].preferredTopics)){ %>
+
+
+       <% tags.forEach(function(t){ %>
+
+        <p><input type="checkbox" name="preferredTopics" id="<%= t %>" value="<%= t %>"> <label class="w3-large" for="<%= t %>"><%= t %></label></p>
+
+       <% })} else{%>
+
+
+        <% tags.forEach(function(t){ %>
+
+            <% if (currUsers1[currUsers1.length-1].preferredTopics.includes(t)){ %>
+            <p><input type="checkbox" name="preferredTopics" id="<%= t %>" value="<%= t %>" checked> <label class="w3-large" for="<%= t %>"><%= t %></label></p>
+    
+            <% } else{ %>
+
+                <p><input type="checkbox" name="preferredTopics" id="<%= t %>" value="<%= t %>"> <label class="w3-large" for="<%= t %>"><%= t %></label></p>
+
+           <% }})}%>
+
+
+
+
+
+        <p>
+          <button class="w3-button w3-black" name="" type="submit">
+            <i class="fa fa-check"></i> SAVE
+          </button>
+        </p>
+
+      </form>
+      
+    </div>
+  </div>
+
+</body>
+<style>
+    html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+[type="checkbox"]
+{
+    vertical-align:middle;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.top {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.middle{border-radius: 0;
+  margin-bottom: -1px;
+}
+
+.cta{
+    color: red;
+}
+
+
+.bottom {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.meh{
+  background-color:#B2B2B2;
+}
+.standout{
+  font-size:100px;
+  font-weight: 700;
+  color:black
+}
+.black{
+  color:black
+}
+input{
+    height:2.5rem;
+}
+.instructions{
+    padding: 2rem;
+}
+select {
+    width: 100%;
+    padding: 12px 12px;
+    border: none;
+    border-radius: 4px;
+  }
+  .hidden{
+    visibility: hidden;
+  }
+  a:link{
+    color: black;
+  }
+</style>
+<script type="text/javascript">
+    function toggle(source) {
+     checkboxes = document.getElementsByName('preferredTopics');
+     for(var i=0, n=checkboxes.length;i<n;i++) {
+       checkboxes[i].checked = source.checked;
+     }
+   }
+     </script>
+</html>
+ 

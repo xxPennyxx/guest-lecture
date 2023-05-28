@@ -1,7 +1,7 @@
 <%- include ("partials/dashboardHeader") -%>
 
 
-<!-- Header with "Event of the Month" -->
+<!-- Header with "Event of the Month"
 <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
   <div class="w3-display-left w3-text-white" style="padding:48px">
     <span class="w3-jumbo w3-hide-small">Exploratory data analysis using TensorFlow</span><br>
@@ -12,16 +12,39 @@
   <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
     
   </div>
-</header>
+</header> -->
 
 
 <!--Upcoming Events section -->
 <div style="padding:128px 16px">
     <span class="w3-jumbo w3-hide-small">UPCOMING EVENTS</span><br><br>
 
+    <% if (upcomingEvents1.length==0) { %>
+
+      <p class="w3-large"> There are currently no upcoming events based on your interest. Please check back later.</p>
+
+      <% } %>
+
     <%   upcomingEvents1=upcomingEvents1.sort((a,b)=>new Date(b.startdate)-new Date(a.startdate)) %>
 
-    <% upcomingEvents1.forEach(function(i){ %>
+    <% upcomingEvents2=[] %>
+
+    <% currUsers1[currUsers1.length-1].preferredTopics.forEach(function(t){ %>
+
+      <% upcomingEvents1.forEach(function(u){ %>
+
+        <%if(u.tags.includes(t)&& u.depts.includes(currUsers1[currUsers1.length-1].dept)){%>
+
+          <%upcomingEvents2.push(u)%>
+        <%}%>
+     <% }) %>
+
+      
+
+
+    <%}) %>
+
+    <% upcomingEvents2.forEach(function(i){ %>
 
 
       <!--Upcoming Events section -->
@@ -66,6 +89,11 @@
 <!-- Past Events Section: ICYMI -->
 <div style="padding:128px 16px">
   <span class="w3-jumbo w3-hide-small">PAST EVENTS</span><br><br>
+  <% if (pastEvents1.length==0) { %>
+
+    <p class="w3-large"> There are no events that have happened so far.</p>
+
+    <% } %>
 
   <%   pastEvents1=pastEvents1.sort((a,b)=>new Date(b.startdate)-new Date(a.startdate)) %>
 

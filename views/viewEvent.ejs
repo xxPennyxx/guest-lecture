@@ -66,10 +66,24 @@ img {
 border-style: solid;
 border-color: white;
 border-radius: 10px;
-padding: 5px;
-margin-right:7.5px;
-margin-top:7.5px;
-margin-bottom:7.5px;
+padding: 1.5px;
+margin-right:10px;
+margin-top:10px;
+margin-bottom:10px;
+
+} 
+
+.depts {
+-moz-border-radius: 15px;
+-webkit-border-radius: 15px;
+border-style: solid;
+border-color: white;
+border-radius: 10px;
+padding: 1.5px;
+margin-right:10px;
+margin-top:10px;
+margin-bottom:10px;
+
 } 
 </style>
 </head>
@@ -82,7 +96,7 @@ margin-bottom:7.5px;
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
       <a href="" class="w3-bar-item w3-button">Welcome, <b><%=currUsers1[currUsers1.length-1].username%></b></a>
-      <a href="#feedback" class="w3-bar-item w3-button"><i class="fa fa-question"></i> FEEDBACK</a>
+      <a href="#feedback" class="w3-bar-item w3-button"><i class="fa fa-question"></i> REQUEST EVENT</a>
       <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
       <a href="/" class="w3-bar-item w3-button"><i class="fa fa-arrow-right"></i> LOG OUT</a>
     </div>
@@ -134,13 +148,15 @@ margin-bottom:7.5px;
  <% } %>
 
     <% event1.tags.forEach(function(t){ %>
-
         <span class="tags"><%=t%></span> 
 
+    <% }) %> <br><br>
 
+    <% event1.depts.forEach(function(d){ %>
+      <span class="depts"><%=d%></span> 
 
+  <% }) %>
 
-    <% }) %>
 
   <br><br>
     <!-- Disable the RSVP button if it's already OVER-->
@@ -156,13 +172,16 @@ margin-bottom:7.5px;
       <%  if((event1.mode=="Online" ||event1.mode=="Hybrid") &&(listOfAttendeeUsernames.includes(currUsers1[currUsers1.length-1].username ) )) { %>
 
         <p><a href="<%=event1.link %>" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Join virtual event</a></p>
+        <p><a href="/view-event/<%=event1.name %>/cancelRSVP" class="w3-button w3-red w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Cancel RSVP</a></p>
+
 
 
 
         <%  } else if(event1.mode=="Offline" &&(listOfAttendeeUsernames.includes(currUsers1[currUsers1.length-1].username ) )) { %>
 
           <p><a href="" style="pointer-events: none" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">You have already RSVP'd to this event</a></p>
-  
+          <p><a href="/view-event/<%=event1.name %>/cancelRSVP" class="w3-button w3-red w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Cancel RSVP</a></p>
+
   
 
       <% } else if(event1.maxAttendees<=0)  { %>

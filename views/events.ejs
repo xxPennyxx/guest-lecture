@@ -63,10 +63,24 @@ img {
 border-style: solid;
 border-color: white;
 border-radius: 10px;
-padding: 5px;
-margin-right:7.5px;
-margin-top:7.5px;
-margin-bottom:7.5px;
+padding: 1.5px;
+margin-right:10px;
+margin-top:10px;
+margin-bottom:10px;
+
+} 
+
+.depts {
+-moz-border-radius: 15px;
+-webkit-border-radius: 15px;
+border-style: solid;
+border-color: white;
+border-radius: 10px;
+padding: 1.5px;
+margin-right:10px;
+margin-top:10px;
+margin-bottom:10px;
+
 } 
 
 input{
@@ -85,8 +99,6 @@ input{
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
       <a href="" class="w3-bar-item w3-button">Welcome, <b>Admin</b></a>
-      <a href="#feedback" class="w3-bar-item w3-button"><i class="fa fa-question"></i> FEEDBACK</a>
-      <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
       <a href="/" class="w3-bar-item w3-button"><i class="fa fa-arrow-right"></i> LOG OUT</a>
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
@@ -134,14 +146,28 @@ input{
     
     
      <% } %>
-    <% event1.tags.forEach(function(t){ %>
 
+
+
+
+
+
+    <% event1.tags.forEach(function(t){ %>
         <span class="tags"><%=t%></span> 
 
+    <% }) %> <br><br>
 
+    <% var depts=["BTech AEE","BTech AIE","BTech ARE","BTech CCE","BTech CIE","BTech CSE","BTech CYS","BTech ECE","BTech EEE","BTech ELC","BTech MEE","MTech CSE","MTech Cyber Security","Int. MSc Physics","Int. MSc Chemistry","Int. MSc Data Science","Int. MSc Mathematics","BA English","MA English","BA Mass Communication"]; %>
+    <% if(event1.depts===depts){ %>
 
+        <span class="depts">All departments</span> 
 
-    <% }) %>
+        <% } else {%>
+
+    <% event1.depts.forEach(function(d){ %>
+      <span class="depts"><%=d%></span> 
+
+  <% }) }%>
     <!-- Disable the RSVP button if it's already OVER-->
   </div> 
 

@@ -47,7 +47,10 @@ const userSchema = {
   role:{
     type: String,
 
-   } 
+   } ,
+   preferredTopics:{
+    type:[String]
+  },
 };
 
 
@@ -79,6 +82,9 @@ const eventSchema={
       type: String,    },
 
       tags:{
+        type:[String]
+      },
+      depts:{
         type:[String]
       },
 
@@ -295,6 +301,7 @@ app.get("/",function(req,res){
         upcomingEvents.push(event);
         else
         pastEvents.push(event);
+        
       })
       //res.render("dashboard",{currUsers1:currUsers, eventList:currEvents2});
       res.render("dashboard",{currUsers1:currUsers, upcomingEvents1:upcomingEvents, pastEvents1:pastEvents});
@@ -330,6 +337,7 @@ app.get("/",function(req,res){
       desc:req.body.desc,
       desc1:req.body.desc1,
       tags:req.body.tags,
+      depts:req.body.depts,
       imgURL:req.body.imgURL,
       startdate:req.body.startdate,
       enddate:req.body.enddate,
@@ -342,8 +350,8 @@ app.get("/",function(req,res){
       days:new Date(req.body.enddate)-new Date(req.body.startdate)+1
     });
 
-    newEvent.save();
     currEvents.push(newEvent);
+    newEvent.save();
     res.redirect("/events/"+req.body.name);
   }
 
@@ -509,6 +517,7 @@ app.get("/",function(req,res){
       desc:req.body.desc,
       desc1:req.body.desc1,
       tags:req.body.tags,
+      depts:req.body.depts,
       imgURL:req.body.imgURL,
       startdate:req.body.startdate,
       enddate:req.body.enddate,
@@ -617,6 +626,48 @@ app.get("/",function(req,res){
       res.redirect("/events/"+eventName);
   
   })
+
+  app.get("/view-event/:eventName/cancelRSVP",function(req,res){
+
+    const eventName=req.params.eventName;
+    currentEvent=eventName;
+    Event.findOne({name:eventName}).then(function(currentEvent){
+      res.render("cancelRSVP",{event1:currentEvent,currUsers1:currUsers});
+    })
+  })
+
+  app.post("/view-event/:eventName/cancelRSVP",function(req,res){
+
+    const eventName=req.params.eventName;
+    currentEvent=eventName;
+    //const studentToCancel1=req.body.studentToCancel;
+    Event.updateOne({name:req.params.eventName}, {$pull: {attendeesList: {attendeeUserName: req.body.studentToCancel}}}).exec();
+    res.redirect("/dashboard");
+
+    
+  })
+
+
+  app.get("/editprofile",function(req,res){
+    res.render("editprofile",{currUsers1:currUsers})
+  })
+
+  app.post("/editprofile",function(req,res){
+
+    const editedProfile={
+      name:req.body.name,
+      username:req.body.username,
+      email:req.body.email,
+      year:req.body.year,
+      dept:req.body.dept,
+      preferredTopics:req.body.preferredTopics
+    };
+    User.updateOne({username:req.body.username},editedProfile).exec();
+    res.redirect("/dashboard");
+
+    
+  })
+
 
 app.listen(3000, function() {
     console.log("Server listening on port 3000 @ http://localhost:3000/ ");
