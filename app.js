@@ -2,6 +2,9 @@ let express=require('express');
 let bodyParser=require('body-parser');
 let ejs = require("ejs");
 const mongoose=require('mongoose');
+const nodemailer=require("nodemailer");
+const sendMail=require("./sendMail");
+
 
 let app=express();
 mongoose.set("strictQuery", false);
@@ -14,6 +17,7 @@ app.use(express.static("public"))
 
 let currEvents=[];
 let currUsers=[];
+let currUserMail;
 
 const userSchema = {
   name:{
@@ -583,7 +587,10 @@ app.get("/",function(req,res){
      foundEvent.maxAttendees-=1;
      foundEvent.save();
      //console.log("List of attendees so far:"+foundEvent.attendeesList); 
-     res.redirect("/view-event/"+currEvent);
+     //res.redirect("/view-event/"+currEvent);
+     currUserMail=attendeeEmail;
+      res.redirect("/view-event/"+currEvent+"/invite");
+
    })
 
   })
@@ -640,8 +647,14 @@ app.get("/",function(req,res){
 
     const eventName=req.params.eventName;
     currentEvent=eventName;
+    let attendees;
     //const studentToCancel1=req.body.studentToCancel;
+    Event.findOne({name:req.params.eventName}).then(function(foundEvent){
+      foundEvent.maxAttendees+=1;;
+      foundEvent.save();
+    })
     Event.updateOne({name:req.params.eventName}, {$pull: {attendeesList: {attendeeUserName: req.body.studentToCancel}}}).exec();
+
     res.redirect("/dashboard");
 
     
@@ -668,6 +681,66 @@ app.get("/",function(req,res){
     
   })
 
+
+  app.get("/view-event/:eventName/invite", async function(req,res){
+    let currEvent1;
+    Event.findOne({name:req.params.eventName}).then(function(foundEvent){
+      currEvent1=foundEvent;
+    })
+    let testAccount=await nodemailer.createTestAccount();
+    let transporter= await nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        //secure: account.smtp.secure,
+        auth: {
+            user: 'preston.conn@ethereal.email',
+            pass: 'pr9WFsw737N97HxxzW'
+        }
+    });
+    
+
+    let message = {
+      from: '"Amrita Vishwa Vidyapeetham" <amrita@amrita.edu>',
+      to: currUserMail,
+      subject: 'New Guest Lecture titled '+currEvent1.name
+      
+  };
+  if(currEvent1.mode=='Offline'){
+
+    message.html= '<h1>Amrita Vishwa Vidyapeetham presents '+currEvent1.name+'</h1><br><p>'+
+      currEvent1.desc+'</p><p>Here are the details of the event:<br>Date:'+currEvent1.startdate+'-'+currEvent1.enddate+
+      '<br>Timings:'+currEvent1.starttime+'-'+currEvent1.endtime+'<br>Venue:'+currEvent1.venue+'</p><p>Please RSVP at least 3 days before the event to receive important updates.<br>Find more information <a href="/view-event/'+
+      currEvent1.name+'">here.</a><br>Regards,<br>Amrita Vishwa Vidyapeetham.'
+  }
+
+  else if(currEvent1.mode=='Online'){
+
+    message.html= '<h1>Amrita Vishwa Vidyapeetham presents '+currEvent1.name+'</h1><br><p>'+
+      currEvent1.desc+'</p><p>Here are the details of the event:<br>Date:'+currEvent1.startdate+'-'+currEvent1.enddate+
+      '<br>Timings:'+currEvent1.starttime+'-'+currEvent1.endtime+'<br>Link to join:'+currEvent1.link+'</p><p>Please RSVP at least 3 days before the event to receive important updates.<br>Find more information <a href="/view-event/'+
+      currEvent1.name+'">here.</a><br>Regards,<br>Amrita Vishwa Vidyapeetham.'
+  }
+  else{
+
+    message.html= '<h1>Amrita Vishwa Vidyapeetham presents '+currEvent1.name+'</h1><br><p>'+
+      currEvent1.desc+'</p><p>Here are the details of the event:<br>Date:'+currEvent1.startdate+'-'+currEvent1.enddate+
+      '<br>Timings:'+currEvent1.starttime+'-'+currEvent1.endtime+'<br>Venue:'+currEvent1.venue+'<br>Link to join:'+currEvent1.link+'</p><p>Please RSVP at least 3 days before the event to receive important updates.<br>Find more information <a href="/view-event/'+
+      currEvent1.name+'">here.</a><br>Regards,<br>Amrita Vishwa Vidyapeetham.'
+  }
+    transporter.sendMail(message, (err, info) => {
+        if (err) {
+            console.log('Error occurred. ' + err.message);
+            return process.exit(1);
+        }
+
+        console.log('Message sent: %s', info.messageId);
+        // Preview only available when sending through an Ethereal account
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    });
+
+      res.redirect("/view-event/"+req.params.eventName);
+
+  })
 
 app.listen(3000, function() {
     console.log("Server listening on port 3000 @ http://localhost:3000/ ");
