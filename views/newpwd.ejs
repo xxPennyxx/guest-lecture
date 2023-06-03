@@ -1,0 +1,32 @@
+<%- include ("partials/signupLoginHeader") -%>
+
+    
+    <main class="form-signin w-100 m-auto">
+        <form action="/new-password" method="post" name="signupform1">
+          <h1 class=" standout h4 mb-3 fw-normal">Change Your Password</h1>
+
+            <div class="form-floating">
+              <input type="password" name="pwd" id="pwd" class="form-control bottom" placeholder="New Password">
+              <label for="pwd">New Password</label>
+            </div>
+            
+            <div class="form-floating">
+                <input type="password" name="pwd1" id="pwd1" class="form-control bottom" placeholder="Confirm New Password">
+                <label for="pwd1">Confirm New Password</label>
+              </div>
+           
+            <br>
+            
+            
+      
+          
+          <button class="w-100 btn btn-lg btn-dark" name="confirm" type="submit" value="<%=currUser1.username%>">Confirm</button>
+        </form>
+        <br>
+      </main>
+    
+      
+      <%- include ("partials/signupLoginFooter") -%>
+
+      
+      

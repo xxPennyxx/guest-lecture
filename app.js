@@ -1,10 +1,12 @@
+require('dotenv').config();
 let express=require('express');
 let bodyParser=require('body-parser');
 let ejs = require("ejs");
 const mongoose=require('mongoose');
 const nodemailer=require("nodemailer");
-const sendMail=require("./sendMail");
-
+//const sendMail=require("./sendMail");
+const bcrypt=require("bcrypt");
+const saltRounds=10;
 
 let app=express();
 mongoose.set("strictQuery", false);
@@ -18,6 +20,7 @@ app.use(express.static("public"))
 let currEvents=[];
 let currUsers=[];
 let currUserMail;
+let currUser;
 
 const userSchema = {
   name:{
@@ -168,7 +171,7 @@ app.get("/",function(req,res){
 
   function validateDate(date){
     let today=new Date();
-    if (new Date(date)>today)
+    if (new Date(date)>=today)
     return true;
     else
     return false;
@@ -192,13 +195,14 @@ app.get("/",function(req,res){
     const newPassword=req.body.createps;
     const newPassword1=req.body.confirmps;
      
-    if(newPassword===newPassword1 && validateEmailId(req.body.email))
+    bcrypt.hash(newPassword,saltRounds,function(err,hash){
+      if(newPassword===newPassword1 && validateEmailId(req.body.email))
     {
       const newUser =new User({
         username: newUsername,
         email:newEmail,
-        createps:newPassword,
-        confirmps:newPassword1,
+        createps:hash,
+        confirmps:hash,
         role:assignRoles(newEmail)
 
         
@@ -220,7 +224,8 @@ app.get("/",function(req,res){
 
       });
     }  
-    else res.redirect("/signup");   
+    else res.redirect("/signup");  
+    }) 
     
   })
 
@@ -689,12 +694,12 @@ app.get("/",function(req,res){
     })
     let testAccount=await nodemailer.createTestAccount();
     let transporter= await nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
+        host: process.env.HOST,
         port: 587,
         //secure: account.smtp.secure,
         auth: {
-            user: 'preston.conn@ethereal.email',
-            pass: 'pr9WFsw737N97HxxzW'
+            user: process.env.USER,
+            pass: process.env.PASS
         }
     });
     
@@ -723,7 +728,7 @@ app.get("/",function(req,res){
   else{
 
     message.html= '<h1>Amrita Vishwa Vidyapeetham presents '+currEvent1.name+'</h1><br><p>'+
-      currEvent1.desc+'</p><p>Here are the details of the event:<br>Date:'+currEvent1.startdate+'-'+currEvent1.enddate+
+      currEvent1.desc+'</p><p>Here are the details of the event:<br><br>Date:'+currEvent1.startdate.DateString()+'-'+currEvent1.enddate.toDateString()+
       '<br>Timings:'+currEvent1.starttime+'-'+currEvent1.endtime+'<br>Venue:'+currEvent1.venue+'<br>Link to join:'+currEvent1.link+'</p><p>Please RSVP at least 3 days before the event to receive important updates.<br>Find more information <a href="/view-event/'+
       currEvent1.name+'">here.</a><br>Regards,<br>Amrita Vishwa Vidyapeetham.'
   }
@@ -742,6 +747,72 @@ app.get("/",function(req,res){
 
   })
 
+  app.get("/forgotpwd",function(req,res){
+    res.render("getemail");
+  })
+
+
+  app.post("/forgotpwd",async function(req,res){
+
+    let currUserMail=req.body.email;
+    
+
+    let testAccount=await nodemailer.createTestAccount();
+    let transporter= await nodemailer.createTransport({
+        host: process.env.HOST,
+        port: 587,
+        //secure: account.smtp.secure,
+        auth: {
+          user: process.env.USER,
+          pass: process.env.PASS
+        }
+    });
+
+
+    let message = {
+      from: '"Amrita Vishwa Vidyapeetham" <amrita@amrita.edu>',
+      to: currUserMail,
+      subject: 'Change your password'
+      
+  };
+
+    message.html= '<p> Dear student, </p><p> Click <a href="http://localhost:3000/new-password">this link</a> to redirect to the password change page, and follow the instructions to reset your password. </p> <br> <p>Regards,<br>Amrita Vishwa Vidyapeetham Guest Lecture Portal';
+
+    transporter.sendMail(message, (err, info) => {
+      if (err) {
+          console.log('Error occurred. ' + err.message);
+          return process.exit(1);
+      }
+
+      console.log('Message sent: %s', info.messageId);
+      // Preview only available when sending through an Ethereal account
+      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  });
+
+  User.findOne({email:currUserMail}).then(function(foundUser){
+    currUser=foundUser;
+  })
+  
+
+    res.redirect("/forgotpwd");
+  })
+
+app.get("/new-password",function(req,res){
+  res.render("newpwd",{currUser1:currUser});
+})
+
+
+app.post("/new-password",function(req,res){
+  let createps1=req.body.pwd;
+  let confirmps1=req.body.pwd1;
+  bcrypt.hash(createps1,saltRounds,function(err,hash){
+    if(createps1===confirmps1){
+
+      User.updateOne({username:req.body.confirm},{createps:hash,confirmps:hash}).exec();
+      res.redirect("/login");
+    }
+  })
+})
 app.listen(3000, function() {
     console.log("Server listening on port 3000 @ http://localhost:3000/ ");
   });

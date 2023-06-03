@@ -1,0 +1,30 @@
+<%- include ("partials/signupLoginHeader") -%>
+
+    
+    <main class="form-signin w-100 m-auto">
+        <form action="/forgotpwd" method="post" name="signupform1">
+          <h1 class=" standout h4 mb-3 fw-normal">Enter email</h1>
+          <p>A mail will be sent to you to change your password.</p>
+
+            <div class="form-floating">
+              <input type="email" name="email" id="email" class="form-control bottom" placeholder="Email address">
+              <label for="email">Email Address</label>
+            </div>
+            
+            
+           
+            <br>
+            
+            
+      
+          
+          <button class="w-100 btn btn-lg btn-dark" name="confirm" type="submit" >Confirm</button>
+        </form>
+        <br>
+      </main>
+    
+      
+      <%- include ("partials/signupLoginFooter") -%>
+
+      
+      
