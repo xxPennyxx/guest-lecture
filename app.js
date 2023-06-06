@@ -271,7 +271,7 @@ app.get("/",function(req,res){
   
     
     if(loginUname!="admin"){
-    var LoggedInUsers=User.find({username:loginUname, confirmps: loginpwd}).then(function(foundItems){
+    var LoggedInUsers=User.find({username:loginUname}).then(function(foundItems){
       if(foundItems.length===0){  
         res.redirect("/login");
       }
