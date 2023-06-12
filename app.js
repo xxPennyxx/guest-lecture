@@ -10,7 +10,7 @@ const saltRounds=10;
 
 let app=express();
 mongoose.set("strictQuery", false);
-mongoose.connect('mongodb://127.0.0.1:27017/guestDB');
+mongoose.connect('mongodb+srv://xxPennyxx:TH34jw281@cluster0.o5bnbgd.mongodb.net/guestDB');
 
 app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({extended:true}));
