@@ -1,0 +1,11 @@
+Command to run on the Hyper terminal to connect to the MongoDB Atlas cluster:
+mongosh "mongodb+srv://cluster0.o5bnbgd.mongodb.net" --apiVersion 1 --username xxPennyxx
+Password: TH34jw281
+
+Name of database: guestDB
+
+mongoose.connect('mongodb+srv://xxPennyxx:TH34jw281@cluster0.o5bnbgd.mongodb.net/guestDB');
+
+Heroku password: TH34jw281&
+
+https://cloud.mongodb.com/v2/64872068c9d526632d7c5271#/metrics/replicaSet/64872a34eb6747773c97db2a/explorer/guestDB/users/find
